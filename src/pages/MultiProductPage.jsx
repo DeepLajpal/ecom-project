@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import Product from "../components/product";
 
 const MultiProductPage = () => {
     const [products, setProducts] = useState([]);
@@ -29,25 +30,16 @@ const MultiProductPage = () => {
                 justifyContent: "center",
             }}>
                 {products?.map((product) => {
-                    console.log(product.title);
                     return (
                         <div className="product-container" key={product.id}>
-                            <div className="product-img" style={{ height: '100px', width: '100px' }}>
-                                <img style={{ height: '100%', width: '100%' }} src={product.images[0]} />
-                            </div>
-                            <div className="product-details">
-                                <p>{product.title}</p>
-                                <p>₹{product.price}</p>
-                            </div>
+                            <Product title={product.title} price={product.price} images={product.images}/>
                         </div>
                     )
                 }
                 )}
             </div>
         </>
-
     )
-
 }
 
 export default MultiProductPage
