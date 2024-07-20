@@ -7,12 +7,17 @@ import {
 } from "react-router-dom";
 import './index.css'
 import ErrorPage from './pages/ErrorPage.jsx';
+import SingleProductPage from './pages/SingleProductPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "product/:productId",
+    element: <SingleProductPage />,
   },
 ]);
 

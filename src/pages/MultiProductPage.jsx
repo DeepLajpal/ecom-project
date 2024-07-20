@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import Product from "../components/product";
+import Product from "../components/Product";
+import { Link } from "react-router-dom";
+import styles from '../styles/MultiProductPage.module.css';
 
 const MultiProductPage = () => {
     const [products, setProducts] = useState([]);
@@ -21,18 +23,13 @@ const MultiProductPage = () => {
     return (
         <>
             <h1>Multi Product page</h1>
-            <div className="multi-product-card-container" style={{
-                display:"grid",
-                gridTemplateColumns: "200px 200px",
-                gridTemplateRows: "200px 200px",
-                alignItems: "center",
-                justifyItems: "center",
-                justifyContent: "center",
-            }}>
+            <div className={styles["multi-product-card-container"]}>
                 {products?.map((product) => {
                     return (
-                        <div className="product-container" key={product.id}>
-                            <Product title={product.title} price={product.price} images={product.images}/>
+                        <div className={styles["product-container"]} key={product.id}>
+                            <Link to={`product/${product.id}`}>
+                                <Product title={product.title} price={product.price} images={product.images[0]} styles={styles}/>
+                            </Link>
                         </div>
                     )
                 }

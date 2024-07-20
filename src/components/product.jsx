@@ -1,13 +1,13 @@
 
-const Product = ({title, price, images}) => {
+const Product = ({title, price, images, styles}) => {
     return (
-        <div className="product-content">
-            <div className="product-img" style={{ height: '100px', width: '100px' }}>
-                <img style={{ height: '100%', width: '100%' }} src={images[0]} />
+        <div className={styles['product-content']}>
+            <div className={styles['product-img-container']}>
+                <img className={styles['product-img']} src={images} />
             </div>
-            <div className="product-details">
-                <p>{title}</p>
-                <p>₹{price}</p>
+            <div className={styles['product-details']}>
+                <p className={styles['product-title']}>{title}</p>
+                <p className={styles['product-price']}>₹{price}</p>
             </div>
         </div>
     )

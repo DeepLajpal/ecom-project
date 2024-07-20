@@ -1,0 +1,17 @@
+.multi-product-card-container {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-template-rows: 200px 200px;
+  place-items: center;
+  justify-content: center;
+}
+
+.product-img-container {
+  height: 100px;
+  width: 100px;
+}
+
+.product-img {
+  height: 100%;
+  width: 100%;
+}
