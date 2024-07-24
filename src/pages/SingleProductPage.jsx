@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import Product from "../components/Product";
 import styles from '../styles/SingleProductPage.module.css'
 
 const SingleProductPage = () => {
@@ -22,8 +21,34 @@ const SingleProductPage = () => {
 
   return (
     <>
-      <div className={styles["single-product-page-container"]}>
-        <Product title={product?.title} price={product?.price} images={product?.images} styles={styles}/>
+      <div className={styles.singleProductPageContainer}>
+        <div className={styles.productContainer}>
+          <div className={styles.productContent}>
+            <div className={styles.productImgContainer}>
+              <div className={styles.mainProductImgContainer}>
+                <img className={styles.mainProductImg} src={product.images} />
+              </div>
+              <div className={styles.otherProductImgsContainer}>
+                <div className={styles.otherProductImgContainer}>
+                  <img className={styles.otherProductImg} src={product.images} />
+                </div>
+                <div className={styles.otherProductImgContainer}>
+                  <img className={styles.otherProductImg} src={product.images} />
+                </div>
+                <div className={styles.otherProductImgContainer}>
+                  <img className={styles.otherProductImg} src={product.images} />
+                </div>
+                <div className={styles.otherProductImgContainer}>
+                  <img className={styles.otherProductImg} src={product.images} />
+                </div>
+              </div>
+            </div>
+            <div className={styles.productDetails}>
+              <p className={styles.productTitle}>{product.title}</p>
+              <p className={styles.productPrice}>₹{product.price}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
 
