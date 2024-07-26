@@ -46,6 +46,7 @@ const SingleProductPage = () => {
             <div className={styles.productDetails}>
               <p className={styles.productTitle}>{product.title}</p>
               <p className={styles.productPrice}>₹{product.price}</p>
+              <p className={styles.productPrice}>Add to Card</p>
             </div>
           </div>
         </div>
