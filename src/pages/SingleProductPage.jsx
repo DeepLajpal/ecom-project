@@ -1,28 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
-import styles from '../styles/SingleProductPage.module.css'
+import { Link, useParams } from "react-router-dom";
+import styles from '../styles/SingleProductPage.module.css';
 
 const SingleProductPage = () => {
   let { productId } = useParams();
   const [product, setProduct] = useState([]);
-  const [selected, setSelected] = useState(true);
+  const [selectedImg, setSelectedImg] = useState(product.images);
+  const onSelect = (imgSrc) => {
+    setSelectedImg(imgSrc);
+  };
 
-  const onSelect = (element)=>{
-    console.log("Hello World, the Selected Value is currently: ", selected);
-    setSelected(!selected);
-    element.target.style.border = "2px solid #648628"
-    console.dir(element.target.parentElement.className);
-  }
   const getProducts = async () => {
     try {
       const response = await axios.get(`https://dummyjson.com/products/${productId}`);
       console.log(response.data);
       setProduct(response.data)
+      console.log(product)
     } catch (error) {
       console.error(error);
     }
   }
+
   useEffect(() => {
     getProducts();
   }, [])
@@ -34,17 +33,21 @@ const SingleProductPage = () => {
           <div className={styles.productContent}>
             <div className={styles.productImgContainer}>
               <div className={styles.mainProductImgContainer}>
-                <img className={styles.mainProductImg} src={product.images} />
+                <img className={styles.mainProductImg} src={selectedImg ?? product?.images?.[0] ?? product.images} /> {/*Using Nullish Coalescing (??)*/}
               </div>
               <div className={styles.otherProductImgsContainer}>
-                <div onClick={(element) => onSelect(element)} className={styles.otherProductImgContainer1}>
-                  <img className={styles.otherProductImg} src={product.images} />
-                </div>
-                <div onClick={(element) => onSelect(element)} className={styles.otherProductImgContainer2}>
-                  <img className={styles.otherProductImg} src={product.images} />
-                </div>
+                {product?.images?.map((imgSrc, index) => {
+                 return <div
+                    key={index}
+                    className={selectedImg === imgSrc ? styles.selectedImgContainer : styles.otherProductImgContainer}
+                    onClick={() => onSelect(imgSrc)}
+                  >
+                    <img className={styles.otherProductImg} src={imgSrc} alt={`Product Thumbnail ${index}`} />
+                  </div>
+                })}
               </div>
             </div>
+
             <div className={styles.rightContainer}>
               <div className={styles.rightContent}>
                 <div className={styles.productBrandNameContainer}>

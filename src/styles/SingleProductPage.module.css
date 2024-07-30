@@ -27,6 +27,8 @@
 .mainProductImgContainer {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 80vh;
   box-sizing: border-box;
   border: 1px solid hsl(0, 8%, 75%);
   border-radius: 3px;
@@ -46,16 +48,6 @@
   grid-column-start: 1;
   grid-template-rows: repeat(4, 25%);
   cursor: pointer;
-}
-
-.otherProductImgContainer1, otherProductImgContainer2 {
-  border: 1px solid #c4baba;
-  border-radius: 3px;
-}
-
-.otherProductImgContainerWithBorder{
-  border-left: 2px solid #648628;
-  border-right: 2px solid #648628;
 }
 
 .rightContent {
@@ -109,4 +101,16 @@
 .productPriceYouSaveSpan{
   font-weight: bold;
   font-size: 110%;
+}
+
+.otherProductImgContainer {
+  border: 1px solid #c4baba;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.selectedImgContainer {
+  border: 2px solid #648628;
+  cursor: pointer;
+  /* Additional styles for the selected image container */
 }
