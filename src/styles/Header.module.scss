@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background: #d6bbbb;
-
+  box-shadow: 2px 2px 8px 0px #bababa;
   .headerContent {
     height: 90%;
     width: 90%;
@@ -14,11 +14,18 @@
     align-items: center;
     justify-items: center;
     grid-template-columns: 11fr 1fr 1fr;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   .brandName{
     place-self: start;
     align-self: center;
+    font-weight: bold;
+    font-family: cursive;
+    text-decoration: none;
+    color: black;
+  }
+  .brandName, .profileIconContainer , .cartIconContainer{
+    cursor: pointer;
   }
 
 }
