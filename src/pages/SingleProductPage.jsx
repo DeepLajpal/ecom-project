@@ -7,16 +7,28 @@ const SingleProductPage = () => {
   let { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [selectedImg, setSelectedImg] = useState(product.images);
+  const [quantityTotal, setQuantityTotal] = useState(0)
+
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
+  const onAddToCart = (e) => {
+    if (product.stock === 0 ) {
+      setQuantityTotal(quantityTotal + 1)
+      alert('Out Of Stock');
+    }
+    else if(quantityTotal === product.stock ){
+      alert(`You cannot add more than ${product.stock} quantities of this product`)
+    }
+    else{
+      setQuantityTotal(quantityTotal + 1);
+    }
+  }
 
   const getProducts = async () => {
     try {
       const response = await axios.get(`https://dummyjson.com/products/${productId}`);
-      console.log(response.data);
       setProduct(response.data)
-      console.log(product)
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +49,7 @@ const SingleProductPage = () => {
               </div>
               <div className={styles.otherProductImgsContainer}>
                 {product?.images?.map((imgSrc, index) => {
-                 return <div
+                  return <div
                     key={index}
                     className={selectedImg === imgSrc ? styles.selectedImgContainer : styles.otherProductImgContainer}
                     onClick={() => onSelect(imgSrc)}
@@ -60,15 +72,28 @@ const SingleProductPage = () => {
                   <p className={styles.productMrpPrice}>MRP:<span className={styles.productMrpPriceSpan}>₹{product.price}</span></p>
                 </div>
                 <div className={styles.productPriceContainer}>
-                  <p className={styles.productPrice}><span>Price: ₹{product.price - (product.price * (product.discountPercentage / 100)).toFixed(0)}</span></p>
+                  <p className={styles.productPrice}><span>Price: ₹{product.price - (product.price * (product.discountPercentage / 100)).toFixed(2)}</span></p>
                 </div>
                 <div className={styles.productPriceYouSaveContainer}>
                   <p className={styles.productPriceYouSave}>You Save: <span className={styles.productPriceYouSaveSpan}>₹{(product.price * (product.discountPercentage / 100)).toFixed(0)} OFF</span></p>
                 </div>
                 <div className={styles.addToCardContainer} >
-                  <Link className={styles.addToCardLink} >
-                    <button className={styles.addToCardBtn}>Add to Card</button>
-                  </Link>
+                  {quantityTotal == 0 ?
+                    <Link className={styles.addToCardLink} >
+                      <button onClick={(e) => onAddToCart(e)} className={styles.addToCartBtn}>Add to Card</button>
+                    </Link>
+                    :
+                    <div className={styles.quantityControllerContainer}>
+                      <div onClick={() => setQuantityTotal(quantityTotal - 1)} className="minusBtnContainer">
+                        <button className={styles.minusBtn}>-</button>
+                      </div>
+                      <div className={styles.quantityDisplayAreaContainer}>
+                        <p className={styles.quantityDisplayArea}>{quantityTotal}</p>
+                      </div>
+                      <div onClick={() => quantityTotal === product.stock ? alert(`You cannot add more than ${product.stock} quantities of this product`) :setQuantityTotal(quantityTotal + 1)} className="plusBtnCotaier">
+                        <button className={styles.plusBtn}>+</button>
+                      </div>
+                    </div>}
                 </div>
               </div>
             </div>

@@ -67,7 +67,7 @@
 .addToCardLink {
   text-decoration: none;
 }
-.addToCardBtn {
+.addToCartBtn {
   font-size: 140%;
   border-radius: 5px;
   padding: 1% 22%;
@@ -113,4 +113,28 @@
   border: 2px solid #648628;
   cursor: pointer;
   /* Additional styles for the selected image container */
+}
+
+.quantityControllerContainer{
+  display: grid;
+  grid-auto-flow: column;
+  width: 40%;
+}
+.minusBtn, .plusBtn{
+  font-size: 140%;
+  border-radius: 5px;
+  padding: 1% 22%;
+  background-color: #CC0000;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+}
+
+.quantityDisplayAreaContainer{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
