@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from '../styles/SingleProductPage.module.css';
+import Header from "../components/Header";
 
 const SingleProductPage = () => {
   let { productId } = useParams();
@@ -41,6 +42,7 @@ const SingleProductPage = () => {
   return (
     <>
       <div className={styles.singleProductPageContainer}>
+      <Header/>
         <div className={styles.productContainer}>
           <div className={styles.productContent}>
             <div className={styles.productImgContainer}>

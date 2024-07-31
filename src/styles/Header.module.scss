@@ -1,0 +1,24 @@
+.headerContainer {
+  height: 8vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #d6bbbb;
+
+  .headerContent {
+    height: 90%;
+    width: 90%;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 11fr 1fr 1fr;
+    font-size: 1.3rem;
+  }
+  .brandName{
+    place-self: start;
+    align-self: center;
+  }
+
+}
