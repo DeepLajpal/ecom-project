@@ -8,6 +8,7 @@ import {
 import './index.css'
 import ErrorPage from './pages/ErrorPage.jsx';
 import SingleProductPage from './pages/SingleProductPage.jsx';
+import ProductCartPage from './pages/ProductCartPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
   {
     path: "product/:productId",
     element: <SingleProductPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "cart/:cartId",
+    element: <ProductCartPage />,
     errorElement: <ErrorPage />,
   },
 ]);

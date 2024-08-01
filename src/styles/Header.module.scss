@@ -16,16 +16,34 @@
     grid-template-columns: 11fr 1fr 1fr;
     font-size: 1.5rem;
   }
-  .brandName{
+  .brandNameContainer{
+    cursor: pointer;
+    display: grid;
+    align-items: center;
     place-self: start;
     align-self: center;
     font-weight: bold;
     font-family: cursive;
+  }
+
+  .profileIconContainer{
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+  }
+  .cartIconContainer{
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+  }
+  .brandName{
     text-decoration: none;
     color: black;
   }
-  .brandName, .profileIconContainer , .cartIconContainer{
-    cursor: pointer;
+  .cartIcon{
+    text-decoration: none;
+    color: black;
+    display: contents;
   }
 
 }
