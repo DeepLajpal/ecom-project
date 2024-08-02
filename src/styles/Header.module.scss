@@ -16,7 +16,7 @@
     grid-template-columns: 11fr 1fr 1fr;
     font-size: 1.5rem;
   }
-  .brandNameContainer{
+  .brandNameContainer {
     cursor: pointer;
     display: grid;
     align-items: center;
@@ -26,24 +26,44 @@
     font-family: cursive;
   }
 
-  .profileIconContainer{
+  .profileIconContainer {
     cursor: pointer;
     display: grid;
     align-items: center;
   }
-  .cartIconContainer{
+  .cartContainer {
     cursor: pointer;
     display: grid;
     align-items: center;
+    position: relative;
   }
-  .brandName{
+  .brandName {
     text-decoration: none;
     color: black;
   }
-  .cartIcon{
+  .cartIconContainer {
+    display: grid;
+    align-items: center;
+  }
+  .cartIcon {
     text-decoration: none;
     color: black;
     display: contents;
   }
-
+  .cartCircleContainer {
+    position: absolute;
+    top: -26%;
+    right: -25%;
+    color: black;
+    font-size: small;
+    border: 2px solid rgb(232, 232, 232);
+    border-radius: 50%;
+    height: 1.1rem;
+    width: 1.1rem;
+    text-align: center;
+    background: white;
+  }
+  .cartTotal{
+    z-index: 2;
+  }
 }
