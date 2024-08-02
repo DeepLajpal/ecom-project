@@ -1,8 +1,10 @@
-import React from 'react'
+import Header from '../components/Header'
 
 const ProductCartPage = () => {
   return (
-    <div>ProductCartPage</div>
+    <div className={styles.productCartContainer}>
+      <Header/>
+    </div>
   )
 }
 

@@ -22,7 +22,6 @@ const MultiProductPage = () => {
 
     return (
         <>
-            <h1>Multi Product page</h1>
             <div className={styles["multi-product-card-container"]}>
                 {products?.map((product) => {
                     return (
