@@ -1,0 +1,253 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.cartHeadingContainer {
+  padding-bottom: 0.7rem;
+}
+.productCartContainer {
+  height: 80vh;
+  width: 80vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 2% 0;
+  font-family: sans-serif;
+
+  .productCartContent {
+    .productCartSubtotalAndCheckoutBtnContent {
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      border-radius: 0.3rem;
+      padding: 1rem;
+      background: #202020;
+      margin-bottom: 0.7rem;
+
+      .subtotalContainer {
+        display: grid;
+        gap: 0.3rem;
+
+        .cartSubtotal {
+          color: white;
+
+          .cartTotalItems {
+            font-weight: bold;
+          }
+        }
+        .savingTotal {
+          color: #91c733;
+          width: fit-content;
+          background: linear-gradient(
+            to right,
+            rgb(255 255 255 / 0%),
+            rgb(255 255 255 / 16%)
+          );
+          font-weight: 700;
+          padding: 0.3rem;
+          border-radius: 0.2rem;
+
+          .savingTotalAmt {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .checkoutBtnContainer {
+        width: 100%;
+        height: 100%;
+        .checkoutBtnContent {
+          width: 100%;
+          height: 100%;
+          .checkoutBtn {
+            width: 100%;
+            height: 100%;
+            color: white;
+            background: #cc0000;
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: box-shadow 0.2s;
+          }
+          .checkoutBtn:hover {
+            box-shadow: 0px 0px 7px 0px #cc0000;
+          }
+          .checkoutBtn:active {
+            background: #ffb0b0;
+          }
+        }
+      }
+    }
+
+    .cartProductsTableContainer {
+      border-radius: 0.3rem;
+      padding: 1rem;
+
+      .cartProductsTableContent {
+        .cartProductsTableHeaderContainer {
+          .cartProductsTableHeaderContent {
+            display: grid;
+            grid-template-columns: 4fr 1fr 1fr;
+            justify-items: center;
+            color: #afafaf;
+            font-weight: 600;
+
+            .productDetails {
+              place-self: start;
+            }
+          }
+        }
+
+        .cartProductsTableDataContainer {
+          .cartProductsTableDataContent {
+            display: grid;
+            grid-template-columns: 4fr 1fr 1fr;
+            justify-items: center;
+
+            .leftSideContent {
+              display: grid;
+              grid-auto-flow: column;
+              grid-template-columns: 1fr 3fr;
+              align-items: center;
+
+              .leftSide {
+                width: 85%;
+                height: 100%;
+
+                .productImg {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                }
+              }
+
+              .rightSide {
+                display: grid;
+                gap: 0.3rem;
+
+                .productPriceContainer {
+                  display: grid;
+                  grid-auto-flow: column;
+                  grid-template-columns: max-content;
+                  gap: 0.4rem;
+
+                  .productActualPrice {
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                  }
+
+                  .productSavingPrice {
+                    font-size: 0.8rem;
+                    text-decoration: line-through;
+                    color: #8e8e8e;
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+
+            .middleContainer {
+              display: grid;
+              gap: 0.3rem;
+              align-items: center;
+
+              .quantityControllerContainer {
+                display: grid;
+                grid-auto-flow: column;
+                width: 100%;
+                height: fit-content;
+                place-self: end;
+                border: 1px solid #a8a8a8;
+                border-radius: 0.3rem;
+                padding: 0.4rem;
+                color: #8e8e8e;
+
+                .minusBtnContainer,
+                .plusBtnContainer {
+                  width: 100%;
+                  height: 100%;
+                  display: grid;
+                  color: #454545;
+                }
+                .minusBtnContainer:hover,
+                .plusBtnContainer:hover {
+                  background: #cc0000;
+                  color: white;
+                  border-radius: 0.3rem;
+                  transition: background 0.5s;
+                }
+
+                .minusBtn,
+                .plusBtn {
+                  font-size: 140%;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  border: none;
+                  width: 100%;
+                  text-align: center;
+                  background: none;
+                }
+
+                .quantityDisplayAreaContainer {
+                  width: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  color: #454545;
+                }
+              }
+
+              .quantityControllerContainer:hover {
+                color: #8e8e8e;
+                box-shadow: 0px 0px 3px 0px;
+              }
+
+              .btnContainers {
+                display: grid;
+                grid-auto-flow: column;
+                font-size: 0.8rem;
+                padding: 0.3rem;
+                gap: 0.3rem;
+                color: #787878;
+                height: fit-content;
+
+                .deleteBtn,
+                .saveForLaterBtn {
+                  cursor: pointer;
+                }
+              }
+            }
+
+            .rightSideContainer {
+              display: grid;
+              align-items: center;
+
+              .productPriceContainer {
+                display: grid;
+                justify-items: end;
+                gap: 0.3rem;
+                font-size: 0.95rem;
+
+                .productActualPrice{
+                  font-weight: 600;
+                }
+
+                .productSavingPrice {
+                  font-size: 0.8rem;
+                  color: #638527;
+
+                  .savingAmt {
+                    font-weight: bold;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
