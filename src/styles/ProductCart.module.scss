@@ -1,5 +1,118 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.cartHeadingContainer {
+  padding-bottom: 0.7rem;
+}
+.productCartContainer {
+  height: 80vh;
+  width: 80vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 2% 0;
+  font-family: sans-serif;
+
+  .productCartContent {
+    .productCartSubtotalAndCheckoutBtnContent {
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      border-radius: 0.3rem;
+      padding: 1rem;
+      background: #202020;
+      margin-bottom: 0.7rem;
+
+      .subtotalContainer {
+        display: grid;
+        gap: 0.3rem;
+
+        .cartSubtotal {
+          color: white;
+        }
+        .savingTotal {
+          color: #91c733;
+          width: fit-content;
+          background: linear-gradient(
+            to right,
+            rgb(255 255 255 / 0%),
+            rgb(255 255 255 / 16%)
+          );
+          font-weight: 700;
+          padding: 0.3rem;
+          border-radius: 0.2rem;
+
+          .savingTotalAmt {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .checkoutBtnContainer {
+        width: 100%;
+        height: 100%;
+        .checkoutBtnContent {
+          width: 100%;
+          height: 100%;
+          .checkoutBtn {
+            width: 100%;
+            height: 100%;
+            color: white;
+            background: #cc0000;
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: box-shadow 0.2s;
+          }
+          .checkoutBtn:hover {
+            box-shadow: 0px 0px 7px 0px #cc0000;
+          }
+          .checkoutBtn:active {
+            background: #ffb0b0;
+          }
+        }
+      }
+    }
+
+    .cartProductsTableContainer {
+      border-radius: 0.3rem;
+      padding: 1rem;
+
+      .cartProductsTableContent {
+        .cartProductsTableHeaderContainer {
+          .cartProductsTableHeaderContent {
+            display: grid;
+            grid-template-columns: 4fr 1fr 1fr;
+            justify-items: center;
+
+            .productDetails {
+              place-self: start;
+            }
+          }
+        }
+
+        .cartProductsTableDataContainer {
+          .cartProductsTableDataContent {
+            display: grid;
+            grid-template-columns: 4fr 1fr 1fr;
+            justify-items: center;
+
+            .cartProductsDetailsContainer{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                .leftSideContainer{
+
+                }
+
+            }
+          }
+        }
+      }
+    }
+  }
 }
