@@ -81,8 +81,8 @@ const ProductCartPage = () => {
                       <div className={styles.rightSide}>
                         <span className={styles.productName}>{product.title}</span>
                         <div className={styles.productPriceContainer}>
-                          <span className={styles.productActualPrice}>₹ {product.price}</span>
-                          <span className={styles.productSavingPrice}>₹{((product.price*product.discountPercentage)/100).toFixed(2)}</span>
+                          <span className={styles.productActualPrice}>₹ {(product.price - (product.price * product.discountPercentage) / 100).toFixed(2)}</span>
+                          <span className={styles.productSavingPrice}>₹{(product.price).toFixed(2)}</span>
                         </div>
                       </div>
 
@@ -93,7 +93,7 @@ const ProductCartPage = () => {
                     <div className={styles.middleContent}>
 
                       <div className={styles.quantityControllerContainer}>
-                        <div onClick={() => setQuantityTotal(quantityTotal - 1)} className={styles.minusBtnContainer}>
+                        <div onClick={() => quantityTotal <= 1 ? quantityTotal : setQuantityTotal(quantityTotal - 1)} className={styles.minusBtnContainer}>
                           <span className={styles.minusBtn}>-</span>
                         </div>
                         <div className={styles.quantityDisplayAreaContainer}>
@@ -115,8 +115,8 @@ const ProductCartPage = () => {
 
                   <div className={styles.rightSideContainer}>
                     <div className={styles.productPriceContainer}>
-                      <span className={styles.productActualPrice}> ₹{(product.price - (product.price*product.discountPercentage)/100).toFixed(2)}</span>
-                      <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{(product.price - (product.price - (product.price*product.discountPercentage)/100)).toFixed(2)}</span></span>
+                      <span className={styles.productActualPrice}> ₹{(product.price - (product.price * product.discountPercentage) / 100).toFixed(2)}</span>
+                      <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{(product.price - (product.price - (product.price * product.discountPercentage) / 100)).toFixed(2)}</span></span>
                     </div>
                   </div>
 
