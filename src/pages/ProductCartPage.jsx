@@ -4,11 +4,11 @@ import styles from '../styles/ProductCart.module.scss'
 import { useEffect, useState } from 'react';
 
 const ProductCartPage = () => {
-  const cartSubtotal = 10;
-  const cartTotalSaving = 11;
-  const cartTotalItems = 50;
+  const [cartSubtotal, setCartSubtotal] = useState(10);
+  const [cartTotalSaving, setCartTotalSaving] = useState(11);
+  const [cartTotalItems,setCartTotalItems] = useState(50);
   const [product, setProduct] = useState([]);
-  const [quantityTotal, setQuantityTotal] = useState(0)
+  const [quantityTotal, setQuantityTotal] = useState(1)
 
 
   const getProduct = async () => {
@@ -81,8 +81,8 @@ const ProductCartPage = () => {
                       <div className={styles.rightSide}>
                         <span className={styles.productName}>{product.title}</span>
                         <div className={styles.productPriceContainer}>
-                          <span className={styles.productActualPrice}>₹ {product.price}</span>
-                          <span className={styles.productSavingPrice}>₹{((product.price*product.discountPercentage)/100).toFixed(2)}</span>
+                          <span className={styles.productActualPrice}>₹ {(product.price - (product.price*product.discountPercentage)/100).toFixed(2)}</span>
+                          <span className={styles.productSavingPrice}>₹{product.price}</span>
                         </div>
                       </div>
 
@@ -93,7 +93,7 @@ const ProductCartPage = () => {
                     <div className={styles.middleContent}>
 
                       <div className={styles.quantityControllerContainer}>
-                        <div onClick={() => setQuantityTotal(quantityTotal - 1)} className={styles.minusBtnContainer}>
+                        <div onClick={() => quantityTotal<= 1 ? quantityTotal : setQuantityTotal(quantityTotal - 1)} className={styles.minusBtnContainer}>
                           <span className={styles.minusBtn}>-</span>
                         </div>
                         <div className={styles.quantityDisplayAreaContainer}>
@@ -115,8 +115,8 @@ const ProductCartPage = () => {
 
                   <div className={styles.rightSideContainer}>
                     <div className={styles.productPriceContainer}>
-                      <span className={styles.productActualPrice}> ₹{(product.price - (product.price*product.discountPercentage)/100).toFixed(2)}</span>
-                      <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{(product.price - (product.price - (product.price*product.discountPercentage)/100)).toFixed(2)}</span></span>
+                      <span className={styles.productActualPrice}> ₹{((product.price - (product.price*product.discountPercentage)/100)*quantityTotal).toFixed(2)}</span>
+                      <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{((product.price - (product.price - (product.price*product.discountPercentage)/100))*quantityTotal).toFixed(2)}</span></span>
                     </div>
                   </div>
 
