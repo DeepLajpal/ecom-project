@@ -4,25 +4,45 @@ import styles from '../styles/ProductCart.module.scss'
 import { useEffect, useState } from 'react';
 
 const ProductCartPage = () => {
-  const [cartSubtotal, setCartSubtotal] = useState(10);
-  const [cartTotalSaving, setCartTotalSaving] = useState(11);
-  const [cartTotalItems,setCartTotalItems] = useState(50);
-  const [product, setProduct] = useState([]);
-  const [quantityTotal, setQuantityTotal] = useState(1)
+  const [cartSubtotal, setCartSubtotal] = useState(0);
+  const [cartTotalSaving, setCartTotalSaving] = useState(0);
+  const [cartTotalItems, setCartTotalItems] = useState(0);
+  const [products, setProducts] = useState([]);
+  const [quantityTotal, setQuantityTotal] = useState(1);
+  const productsId = [1, 2, 3, 4, 5, 6];
 
-
-  const getProduct = async () => {
+  const getProducts = async () => {
     try {
-      const response = await axios.get(`https://dummyjson.com/products/${2}`);
-      setProduct(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.error(error);
+      const productsData = await Promise.all(productsId.map(async (productId) => {
+        const response = await axios.get(`https://dummyjson.com/products/${productId}`);
+        return response.data;
+      })
+      );
+      setProducts(productsData);
+
+      const newCartSubtotal = productsData.reduce((totalCartValue, currentProduct) => {
+        const productPriceAfterDiscount = (currentProduct.price - ((currentProduct.price * currentProduct.discountPercentage) / 100)) * quantityTotal;
+        return totalCartValue + productPriceAfterDiscount;
+      }, 0)
+
+      const newCartSavingTotal = productsData.reduce((totalCartSavingTotal, currentProduct) => {
+        const currentProductSaving = (currentProduct.price - (currentProduct.price - (currentProduct.price * currentProduct.discountPercentage) / 100)) * quantityTotal;
+        return totalCartSavingTotal + currentProductSaving;
+      }, 0)
+
+      setCartSubtotal(newCartSubtotal.toFixed(2));
+      setCartTotalSaving(newCartSavingTotal.toFixed(2));
+      setCartTotalItems(productsData.length)
+      console.log(productsData);
+
+    }
+    catch (error) {
+      console.log(error)
     }
   }
 
   useEffect(() => {
-    getProduct();
+    getProducts();
   }, [])
 
   return (
@@ -67,62 +87,75 @@ const ProductCartPage = () => {
                 </div>
               </div>
 
-              <div className={styles.cartProductsTableDataContainer}>
+              {products.map((product) => {
 
-                <div className={styles.cartProductsTableDataContent}>
+                return (<div key={product.id} className={styles.cartProductsTableDataContainer}>
 
-                  <div className={styles.leftSideContainer}>
-                    <div className={styles.leftSideContent}>
+                  <div className={styles.cartProductsTableDataContent}>
 
-                      <div className={styles.leftSide}>
-                        <img className={styles.productImg} src={product.images} alt="" />
-                      </div>
+                    <div className={styles.leftSideContainer}>
+                      <div className={styles.leftSideContent}>
 
-                      <div className={styles.rightSide}>
-                        <span className={styles.productName}>{product.title}</span>
-                        <div className={styles.productPriceContainer}>
-                          <span className={styles.productActualPrice}>₹ {(product.price - (product.price*product.discountPercentage)/100).toFixed(2)}</span>
-                          <span className={styles.productSavingPrice}>₹{product.price}</span>
+                        <div className={styles.leftSide}>
+                          <img className={styles.productImg} src={product.images} alt="" />
                         </div>
-                      </div>
 
+                        <div className={styles.rightSide}>
+                          <span className={styles.productName}>{product.title}</span>
+                          <div className={styles.productPriceContainer}>
+                            <span className={styles.productActualPrice}>₹ {(product.price - (product.price * product.discountPercentage) / 100).toFixed(2)}</span>
+                            <span className={styles.productSavingPrice}>₹{product.price}</span>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
+
+                    <div className={styles.middleContainer}>
+                      <div className={styles.middleContent}>
+
+                        <div className={styles.quantityControllerContainer}>
+                          <div onClick={() => {
+                            quantityTotal <= 1 ? quantityTotal : setQuantityTotal(quantityTotal - 1);
+                            setCartSubtotal((cartSubtotal + ((product.price - ((product.price * product.discountPercentage) / 100)) * quantityTotal)).toFixed(2));
+                          }
+                          } className={styles.minusBtnContainer} >
+                            <span className={styles.minusBtn}>-</span>
+                          </div>
+                          <div className={styles.quantityDisplayAreaContainer}>
+                            <p className={styles.quantityDisplayArea}>{quantityTotal}</p>
+                          </div>
+                          <div onClick={() => {
+                            quantityTotal === product.stock ? alert(`You cannot add more than ${product.stock} quantities of this product`) : setQuantityTotal(quantityTotal + 1);
+                            setCartSubtotal((cartSubtotal + ((product.price - ((product.price * product.discountPercentage) / 100)) * quantityTotal)).toFixed(2));
+
+                          }}
+                            className={styles.plusBtnContainer}>
+                            <span className={styles.plusBtn}>+</span>
+                          </div>
+                        </div>
+
+                        <div className={styles.btnContainers}>
+                          <span className={styles.deleteBtn}>Delete</span>
+                          <span className={styles.separatorBtn}>|</span>
+                          <span className={styles.saveForLaterBtn}>Save for later</span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div className={styles.rightSideContainer}>
+                      <div className={styles.productPriceContainer}>
+                        <span className={styles.productActualPrice}> ₹{((product.price - (product.price * product.discountPercentage) / 100) * quantityTotal).toFixed(2)}</span>
+                        <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{((product.price - (product.price - (product.price * product.discountPercentage) / 100)) * quantityTotal).toFixed(2)}</span></span>
+                      </div>
+                    </div>
+
                   </div>
 
-                  <div className={styles.middleContainer}>
-                    <div className={styles.middleContent}>
+                </div>)
 
-                      <div className={styles.quantityControllerContainer}>
-                        <div onClick={() => quantityTotal<= 1 ? quantityTotal : setQuantityTotal(quantityTotal - 1)} className={styles.minusBtnContainer}>
-                          <span className={styles.minusBtn}>-</span>
-                        </div>
-                        <div className={styles.quantityDisplayAreaContainer}>
-                          <p className={styles.quantityDisplayArea}>{quantityTotal}</p>
-                        </div>
-                        <div onClick={() => quantityTotal === product.stock ? alert(`You cannot add more than ${product.stock} quantities of this product`) : setQuantityTotal(quantityTotal + 1)} className={styles.plusBtnContainer}>
-                          <span className={styles.plusBtn}>+</span>
-                        </div>
-                      </div>
-
-                      <div className={styles.btnContainers}>
-                        <span className={styles.deleteBtn}>Delete</span>
-                        <span className={styles.separatorBtn}>|</span>
-                        <span className={styles.saveForLaterBtn}>Save for later</span>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div className={styles.rightSideContainer}>
-                    <div className={styles.productPriceContainer}>
-                      <span className={styles.productActualPrice}> ₹{((product.price - (product.price*product.discountPercentage)/100)*quantityTotal).toFixed(2)}</span>
-                      <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{((product.price - (product.price - (product.price*product.discountPercentage)/100))*quantityTotal).toFixed(2)}</span></span>
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
+              })}
             </div>
           </div>
 
