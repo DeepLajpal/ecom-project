@@ -7,32 +7,81 @@ const ProductCartPage = () => {
   const [cartSubtotal, setCartSubtotal] = useState(0);
   const [cartTotalSaving, setCartTotalSaving] = useState(0);
   const [cartTotalItems, setCartTotalItems] = useState(0);
-  const [products, setProducts] = useState([]);
-  const [quantityTotal, setQuantityTotal] = useState(1);
-  const productsId = [1, 2, 3, 4, 5, 6];
+  // const [products, setProducts] = useState([]);
+  const [cartProductsData, setCartProductsData] = useState([]);
+  const [productsId, setProductsId] = useState([1, 2, 3, 4, 5, 6]);
+
+  const updateCartTotal = (productsData) => {
+    const newCartSubtotal = productsData.reduce((totalCartValue, currentProduct) => {
+      const productPriceAfterDiscount = (currentProduct.price - ((currentProduct.price * currentProduct.discountPercentage) / 100)) * currentProduct.productTotalQuantity;
+      return totalCartValue + productPriceAfterDiscount;
+    }, 0)
+
+    const newCartSavingTotal = productsData.reduce((totalCartSavingTotal, currentProduct) => {
+      const currentProductSaving = (currentProduct.price - (currentProduct.price - (currentProduct.price * currentProduct.discountPercentage) / 100)) * currentProduct.productTotalQuantity;
+      return totalCartSavingTotal + currentProductSaving;
+    }, 0)
+
+    const newCartTotalItems = productsData.reduce((totalCartItems, currentProduct) => {
+      const currentProductTotalQuantity = currentProduct.productTotalQuantity;
+      return totalCartItems + currentProductTotalQuantity;
+    }, 0)
+
+    setCartSubtotal(newCartSubtotal.toFixed(2));
+    setCartTotalSaving(newCartSavingTotal.toFixed(2));
+    setCartTotalItems(newCartTotalItems)
+  }
+
+  const onDecrease = (product) => {
+    const cartProductsDataTemp = cartProductsData.map((cartProduct) => {
+
+      return (cartProduct.id === product.id && cartProduct.productTotalQuantity !== 1 && cartProduct.productTotalQuantity <= cartProduct.stock) ?
+        {
+          ...cartProduct, productSubtotal: (cartProduct.price * (cartProduct.productTotalQuantity - 1)).toFixed(2),
+          productTotalQuantity: cartProduct.productTotalQuantity - 1,
+          productTotalSaving: ((cartProduct.price * (cartProduct.productTotalQuantity - 1)) - ((cartProduct.price * (cartProduct.productTotalQuantity - 1)) - (((cartProduct.price * (cartProduct.productTotalQuantity - 1)) * cartProduct.discountPercentage) / 100))).toFixed(2)
+        }
+        : cartProduct;
+    });
+
+    setCartProductsData(cartProductsDataTemp)
+    console.log("minus clicked", cartProductsDataTemp)
+    updateCartTotal(cartProductsDataTemp);
+  }
+  const onIncrease = (product) => {
+    const cartProductsDataTemp = cartProductsData.map((cartProduct) => {
+      return (cartProduct.id === product.id && cartProduct.productTotalQuantity >= 1 && cartProduct.productTotalQuantity < cartProduct.stock) ?
+        {
+          ...cartProduct, productSubtotal: (cartProduct.price * (cartProduct.productTotalQuantity + 1)).toFixed(2),
+          productTotalQuantity: cartProduct.productTotalQuantity + 1,
+          productTotalSaving: ((cartProduct.price * (cartProduct.productTotalQuantity + 1)) - ((cartProduct.price * (cartProduct.productTotalQuantity + 1)) - (((cartProduct.price * (cartProduct.productTotalQuantity + 1)) * cartProduct.discountPercentage) / 100))).toFixed(2)
+        }
+        : cartProduct;
+    });
+
+
+    setCartProductsData(cartProductsDataTemp)
+    console.log("minus clicked", cartProductsDataTemp)
+    updateCartTotal(cartProductsDataTemp);
+
+  }
 
   const getProducts = async () => {
     try {
-      const productsData = await Promise.all(productsId.map(async (productId) => {
-        const response = await axios.get(`https://dummyjson.com/products/${productId}`);
-        return response.data;
+      const productsData = await Promise.all(productsId.map(async (productsId) => {
+        const response = await axios.get(`https://dummyjson.com/products/${productsId}`);
+        const product = response.data;
+        return {
+          ...product,
+          productTotalQuantity: 1,
+          productSubtotal: (product.price.toFixed(2)),
+          productTotalSaving: (product.price - (product.price - (product.price * product.discountPercentage) / 100)).toFixed(2)
+        };
       })
       );
-      setProducts(productsData);
+      setCartProductsData(productsData);
 
-      const newCartSubtotal = productsData.reduce((totalCartValue, currentProduct) => {
-        const productPriceAfterDiscount = (currentProduct.price - ((currentProduct.price * currentProduct.discountPercentage) / 100)) * quantityTotal;
-        return totalCartValue + productPriceAfterDiscount;
-      }, 0)
-
-      const newCartSavingTotal = productsData.reduce((totalCartSavingTotal, currentProduct) => {
-        const currentProductSaving = (currentProduct.price - (currentProduct.price - (currentProduct.price * currentProduct.discountPercentage) / 100)) * quantityTotal;
-        return totalCartSavingTotal + currentProductSaving;
-      }, 0)
-
-      setCartSubtotal(newCartSubtotal.toFixed(2));
-      setCartTotalSaving(newCartSavingTotal.toFixed(2));
-      setCartTotalItems(productsData.length)
+      updateCartTotal(productsData);
       console.log(productsData);
 
     }
@@ -87,7 +136,7 @@ const ProductCartPage = () => {
                 </div>
               </div>
 
-              {products.map((product) => {
+              {cartProductsData.map((product) => {
 
                 return (<div key={product.id} className={styles.cartProductsTableDataContainer}>
 
@@ -115,21 +164,13 @@ const ProductCartPage = () => {
                       <div className={styles.middleContent}>
 
                         <div className={styles.quantityControllerContainer}>
-                          <div onClick={() => {
-                            quantityTotal <= 1 ? quantityTotal : setQuantityTotal(quantityTotal - 1);
-                            setCartSubtotal((cartSubtotal + ((product.price - ((product.price * product.discountPercentage) / 100)) * quantityTotal)).toFixed(2));
-                          }
-                          } className={styles.minusBtnContainer} >
+                          <div onClick={() => onDecrease(product)} className={styles.minusBtnContainer} >
                             <span className={styles.minusBtn}>-</span>
                           </div>
                           <div className={styles.quantityDisplayAreaContainer}>
-                            <p className={styles.quantityDisplayArea}>{quantityTotal}</p>
+                            <p className={styles.quantityDisplayArea}>{product.productTotalQuantity}</p>
                           </div>
-                          <div onClick={() => {
-                            quantityTotal === product.stock ? alert(`You cannot add more than ${product.stock} quantities of this product`) : setQuantityTotal(quantityTotal + 1);
-                            setCartSubtotal((cartSubtotal + ((product.price - ((product.price * product.discountPercentage) / 100)) * quantityTotal)).toFixed(2));
-
-                          }}
+                          <div onClick={() => onIncrease(product)}
                             className={styles.plusBtnContainer}>
                             <span className={styles.plusBtn}>+</span>
                           </div>
@@ -146,8 +187,8 @@ const ProductCartPage = () => {
 
                     <div className={styles.rightSideContainer}>
                       <div className={styles.productPriceContainer}>
-                        <span className={styles.productActualPrice}> ₹{((product.price - (product.price * product.discountPercentage) / 100) * quantityTotal).toFixed(2)}</span>
-                        <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{((product.price - (product.price - (product.price * product.discountPercentage) / 100)) * quantityTotal).toFixed(2)}</span></span>
+                        <span className={styles.productActualPrice}> ₹{product.productSubtotal}</span>
+                        <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{product.productTotalSaving}</span></span>
                       </div>
                     </div>
 
