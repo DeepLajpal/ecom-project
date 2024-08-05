@@ -146,7 +146,7 @@ const ProductCartPage = () => {
                       <div className={styles.leftSideContent}>
 
                         <div className={styles.leftSide}>
-                          <img className={styles.productImg} src={product.images} alt="" />
+                          <img className={styles.productImg} src={product.images[0]} alt="" />
                         </div>
 
                         <div className={styles.rightSide}>
