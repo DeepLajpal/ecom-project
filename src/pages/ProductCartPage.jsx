@@ -96,7 +96,6 @@ const ProductCartPage = () => {
 
   return (
     <>
-      <Header />
       <div className={styles.productCartContainer}>
         <div className={styles.productCartContent}>
 

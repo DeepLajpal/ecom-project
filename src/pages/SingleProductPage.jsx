@@ -42,7 +42,6 @@ const SingleProductPage = () => {
   return (
     <>
       <div className={styles.singleProductPageContainer}>
-      <Header/>
         <div className={styles.productContainer}>
           <div className={styles.productContent}>
             <div className={styles.productImgContainer}>

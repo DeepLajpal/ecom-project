@@ -3,7 +3,6 @@ import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
     return (
         <div>
-            <Header />
             <MultiProductPage/>
         </div>
     )
