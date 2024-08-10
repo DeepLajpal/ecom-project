@@ -8,8 +8,8 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import SingleProductPage from './pages/SingleProductPage.jsx';
 import ProductCartPage from './pages/ProductCartPage.jsx';
 import HomePage from './pages/HomePage'
-// import store from './app/store';
-// import { Provider } from 'react-redux';
+import store from './app/store';
+import { Provider } from 'react-redux';
 import App from './App.jsx';
 
 const router = createBrowserRouter([
@@ -36,6 +36,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <Provider store={store}>
       <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )
