@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Header from '../components/Header'
 import styles from '../styles/ProductCart.module.scss'
 import { useEffect, useState } from 'react';
 
