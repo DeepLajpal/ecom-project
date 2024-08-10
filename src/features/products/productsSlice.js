@@ -4,7 +4,6 @@ const productsSlice = createSlice({
   name: 'products',
   initialState: {
     list: [],
-    status: 'idle',
   },
   reducers: {
     setProducts: (state, action) => {
@@ -13,5 +12,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setProducts, setStatus } = productsSlice.actions;
+export const { setProducts } = productsSlice.actions;
 export default productsSlice.reducer;
