@@ -13,7 +13,7 @@ const ProductList = () => {
   const getProducts = async () => {
     try {
       const response = await axios.get('https://dummyjson.com/products');
-      console.log(response.data.products);
+      // console.log(response.data.products);
       dispatch(setProducts(response.data.products))
     } catch (error) {
       console.error(error);
@@ -26,15 +26,17 @@ const ProductList = () => {
   //   if (status === 'loading') return <p>Loading...</p>;
   //   if (status === 'failed') return <p>Error: {error}</p>;
 
-  return (
-    <ul>
-      {items.map(product => {
-        console.log(product.title)
-        return <li key={product.id}>{product.title}</li>
-      }
-      )}
-    </ul>
-  );
+  return ;
+  // return (
+    // <ul>
+    //   {items.map(product => {
+    //     console.log(product.title)
+    //     return <li key={product.id}>{product.title}</li>
+    //   }
+    //   )}
+    // </ul>
+    
+  // );
 };
 
 export default ProductList;
