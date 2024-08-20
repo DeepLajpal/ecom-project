@@ -1,9 +1,9 @@
-import ProductList from '../app/ProductList.jsx'
+import GetProductList from '../components/GetProductList.jsx'
 import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
     return (
         <div>
-            <ProductList/>
+            <GetProductList/>
             <MultiProductPage/>
         </div>
     )

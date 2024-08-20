@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setProducts } from '../features/products/productsSlice';
 import axios from 'axios';
 
-const ProductList = () => {
+const GetProductList = () => {
 
   const dispatch = useDispatch();
 
@@ -23,4 +23,4 @@ const ProductList = () => {
 
 };
 
-export default ProductList;
+export default GetProductList;
