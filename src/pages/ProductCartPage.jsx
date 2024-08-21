@@ -1,6 +1,9 @@
 import axios from 'axios';
 import styles from '../styles/ProductCart.module.scss'
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../features/cart/cartSelector';
+
 
 const ProductCartPage = () => {
   const [cartSubtotal, setCartSubtotal] = useState(0);
@@ -9,7 +12,8 @@ const ProductCartPage = () => {
   // const [products, setProducts] = useState([]);
   const [cartProductsData, setCartProductsData] = useState([]);
   const [productsId, setProductsId] = useState([1, 2, 3, 4, 5, 6]);
-
+  const cartProducts = useSelector(selectCartItems)
+  console.log("cartProducts",cartProducts)
   const updateCartTotal = (productsData) => {
     const newCartSubtotal = productsData.reduce((totalCartValue, currentProduct) => {
       const productPriceAfterDiscount = (currentProduct.price - ((currentProduct.price * currentProduct.discountPercentage) / 100)) * currentProduct.productTotalQuantity;
@@ -67,8 +71,8 @@ const ProductCartPage = () => {
 
   const getProducts = async () => {
     try {
-      const productsData = await Promise.all(productsId.map(async (productsId) => {
-        const response = await axios.get(`https://dummyjson.com/products/${productsId}`);
+      const productsData = await Promise.all(cartProducts.map(async (item) => {
+        const response = await axios.get(`https://dummyjson.com/products/${item.productId}`);
         const product = response.data;
         return {
           ...product,
@@ -81,7 +85,7 @@ const ProductCartPage = () => {
       setCartProductsData(productsData);
 
       updateCartTotal(productsData);
-      console.log(productsData);
+      // console.log(productsData);
 
     }
     catch (error) {

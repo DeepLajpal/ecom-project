@@ -2,13 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from '../styles/SingleProductPage.module.css';
+import { addItem, removeItem} from "../features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../features/cart/cartSelector";
 
 const SingleProductPage = () => {
   let { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [selectedImg, setSelectedImg] = useState(product.images);
-  const [quantityTotal, setQuantityTotal] = useState(0)
+  const [quantityTotal, setQuantityTotal] = useState(0);
+  const cartProducts = useSelector(selectCartItems)
 
+  const dispatch = useDispatch();
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
@@ -22,6 +27,7 @@ const SingleProductPage = () => {
     }
     else{
       setQuantityTotal(quantityTotal + 1);
+      dispatch(addItem({productId, quantityTotal: quantityTotal + 1}))
     }
   }
 

@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 const MultiProductPage = () => {
 
     const products = useSelector(selectProductsItems);
-    console.log(products)
-
     return (
         <>
             <div className={styles["multi-product-card-container"]}>
