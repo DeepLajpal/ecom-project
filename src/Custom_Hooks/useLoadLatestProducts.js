@@ -19,8 +19,6 @@ const GetProductList = () => {
     getProducts();
   }, [])
 
-  return;
-
 };
 
 export default GetProductList;

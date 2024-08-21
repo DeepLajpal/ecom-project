@@ -1,9 +1,9 @@
-import GetProductList from '../components/GetProductList.jsx'
+import useLoadLatestProducts from '../Custom_Hooks/useLoadLatestProducts.js'
 import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
+    useLoadLatestProducts()
     return (
         <div>
-            <GetProductList/>
             <MultiProductPage/>
         </div>
     )
