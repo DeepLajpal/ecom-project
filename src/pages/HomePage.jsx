@@ -1,4 +1,4 @@
-import useFetchAllProducts from '../Custom_Hooks/useFetchAllProducts.js'
+import useFetchAllProducts from '../hooks/useFetchAllProducts.js'
 import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
     useFetchAllProducts()

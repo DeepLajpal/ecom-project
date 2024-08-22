@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.cartHeadingContainer {
+  padding-bottom: 0.7rem;
+}
+
+.productCartContainer {
+  height: 80vh;
+  width: 80vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 2% 0;
+  font-family: sans-serif;
+
+  .productCartContent {
+
+    .cartProductsTableContainer {
+      border-radius: 0.3rem;
+      padding: 1rem;
+    }
+  }
+}

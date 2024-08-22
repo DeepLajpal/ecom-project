@@ -1,0 +1,63 @@
+.productCartSubtotalAndCheckoutBtnContent {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  background: #202020;
+  margin-bottom: 0.7rem;
+
+  .subtotalContainer {
+    display: grid;
+    gap: 0.3rem;
+
+    .cartSubtotal {
+      color: white;
+
+      .cartTotalItems {
+        font-weight: bold;
+      }
+    }
+    .savingTotal {
+      color: #91c733;
+      width: fit-content;
+      background: linear-gradient(
+        to right,
+        rgb(255 255 255 / 0%),
+        rgb(255 255 255 / 16%)
+      );
+      font-weight: 700;
+      padding: 0.3rem;
+      border-radius: 0.2rem;
+
+      .savingTotalAmt {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .checkoutBtnContainer {
+    width: 100%;
+    height: 100%;
+    .checkoutBtnContent {
+      width: 100%;
+      height: 100%;
+      .checkoutBtn {
+        width: 100%;
+        height: 100%;
+        color: white;
+        background: #cc0000;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: box-shadow 0.2s;
+      }
+      .checkoutBtn:hover {
+        box-shadow: 0px 0px 7px 0px #cc0000;
+      }
+      .checkoutBtn:active {
+        background: #ffb0b0;
+      }
+    }
+  }
+}

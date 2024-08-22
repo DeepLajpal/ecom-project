@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import styles from '../styles/SingleProductPage.module.css';
+import { useParams } from "react-router-dom";
+import styles from '../styles/SingleProductPage.module.scss';
 import { addItem, removeItem } from "../features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../features/cart/cartSelector";
@@ -12,7 +12,6 @@ const SingleProductPage = () => {
   const [selectedImg, setSelectedImg] = useState(product.images);
   const [quantityTotal, setQuantityTotal] = useState(0);
   const cartProducts = useSelector(selectCartItems)
-  // const quantityTotal
   console.log("cartProducts", cartProducts)
   const dispatch = useDispatch();
   const onSelect = (imgSrc) => {
@@ -111,7 +110,7 @@ const SingleProductPage = () => {
                         <button className={styles.plusBtn}>+</button>
                       </div>
                     </div>}
-                </div>``
+                </div>
               </div>
             </div>
           </div>
