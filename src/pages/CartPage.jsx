@@ -1,10 +1,10 @@
 import axios from 'axios';
-import styles from '../styles/CartPage.module.scss';
+import styles from '../styles/cart/CartPage.module.scss';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../features/cart/cartSelector';
-import CartSummary from '../components/CartSummary';
-import CartProductList from '../components/CartProductList';
+import CartSummary from '../components/cart/CartSummary';
+import CartProductList from '../components/cart/CartProductList';
 import { updateCartTotal, updateQuantity } from '../utils/cartUtils';
 
 const CartPage = () => {

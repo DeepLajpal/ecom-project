@@ -1,6 +1,6 @@
 
-import styles from '../styles/CartProduct.module.scss'
-import QuantitySelector from './QuantitySelector';
+import styles from '../../styles/cart/CartProduct.module.scss'
+import QuantitySelector from '../QuantitySelector';
 const CartProduct = ({ product, onDecrease, onIncrease }) => {
     return (<div className={styles.cartProductsTableDataContainer}>
 

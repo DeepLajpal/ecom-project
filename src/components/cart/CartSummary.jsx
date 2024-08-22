@@ -1,4 +1,4 @@
-import styles from '../styles/CartSummary.module.scss';
+import styles from '../../styles/cart/CartSummary.module.scss';
 const CartSummary = ({cartTotalItems, cartTotalSaving, cartSubtotal}) => {
     return <div className={styles.productCartSubtotalAndCheckoutBtnContainer}>
         <div className={styles.productCartSubtotalAndCheckoutBtnContent}>

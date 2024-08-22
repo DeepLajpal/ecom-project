@@ -1,5 +1,5 @@
 import CartProduct from './CartProduct';
-import styles from '../styles/CartProductList.module.scss'
+import styles from '../../styles/cart/CartProductList.module.scss'
 
 const CartProductList = ({ cartProductsData, onDecrease, onIncrease }) => {
   return (
