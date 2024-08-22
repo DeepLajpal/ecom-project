@@ -8,26 +8,36 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import SingleProductPage from './pages/SingleProductPage.jsx';
 import ProductCartPage from './pages/ProductCartPage.jsx';
 import HomePage from './pages/HomePage'
+import store from './app/store';
+import { Provider } from 'react-redux';
+import App from './App.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "product/:productId",
-    element: <SingleProductPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "cart/:cartId",
-    element: <ProductCartPage />,
-    errorElement: <ErrorPage />,
-  },
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "product/:productId",
+        element: <SingleProductPage />,
+      },
+      {
+        path: "cart/:cartId",
+        element: <ProductCartPage />,
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )

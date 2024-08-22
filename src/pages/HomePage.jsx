@@ -1,9 +1,9 @@
-import Header from '../components/Header'
+import useFetchAllProducts from '../Custom_Hooks/useFetchAllProducts.js'
 import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
+    useFetchAllProducts()
     return (
         <div>
-            <Header />
             <MultiProductPage/>
         </div>
     )
