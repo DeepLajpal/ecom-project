@@ -1,5 +1,5 @@
 import styles from '../styles/QuantitySelector.module.scss';
-const QuantitySelector = ({onDecrease, onIncrease, product}) => {
+const QuantitySelector = ({onDecrease, onIncrease, product, cartProductQuantity}) => {
     return (
         <div className={styles.middleContainer}>
             <div className={styles.middleContent}>
@@ -9,7 +9,7 @@ const QuantitySelector = ({onDecrease, onIncrease, product}) => {
                         <span className={styles.minusBtn}>-</span>
                     </div>
                     <div className={styles.quantityDisplayAreaContainer}>
-                        <p className={styles.quantityDisplayArea}>{product.productTotalQuantity}</p>
+                        <p className={styles.quantityDisplayArea}>{product?.productTotalQuantity ?? cartProductQuantity}</p>
                     </div>
                     <div onClick={() => onIncrease(product)}
                         className={styles.plusBtnContainer}>
