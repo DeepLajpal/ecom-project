@@ -13,7 +13,7 @@ const CartPage = () => {
   const [cartTotalItems, setCartTotalItems] = useState(0);
   const [cartProductsData, setCartProductsData] = useState([]);
   const cartProducts = useSelector(selectCartItems);
-
+console.log("cartProducts", cartProducts)
   const onDecrease = (product) => {
     const updatedProducts = updateQuantity(cartProductsData, product, 'decrease');
     setCartProductsData(updatedProducts);

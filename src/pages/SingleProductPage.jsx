@@ -13,32 +13,33 @@ const SingleProductPage = () => {
   const [selectedImg, setSelectedImg] = useState(product.images);
   const [quantityTotal, setQuantityTotal] = useState(0);
   const cartProducts = useSelector(selectCartItems)
-  const cartProduct = cartProducts.find((product) => product.id === productId)
-  console.log("cartProducts", cartProduct)
+  const cartProduct = cartProducts.find((product) => product.productId === productId)
+  const cartProductQuantity = cartProduct?.quantityTotal ?? 0;
+  console.log("cartProduct", cartProduct)
   const dispatch = useDispatch();
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
 
   const increaseQuantity = () => {
-    const cartItem = { product, increaseBy: 1 };
+    const cartItem = { productId, increaseBy: 1 };
     dispatch(addItem(cartItem));
   }
   const decreaseQuantity = () => {
-    const cartItem = { product, decreaseBy: 1 };
-    const newQuantity = quantityTotal - 1;
-    setQuantityTotal(newQuantity);
+    const cartItem = { productId, decreaseBy: 1 };
+    // const newQuantity = cartProductQuantity - 1;
+    // setQuantityTotal(newQuantity);
     dispatch(removeItem(cartItem));
   }
 
   const onAddToCart = (e) => {
     if (product.stock === 0) {
       alert('Out Of Stock');
-    } else if (quantityTotal === product.stock) {
+    } else if (cartProductQuantity === product.stock) {
       alert(`You cannot add more than ${product.stock} quantities of this product`);
     } else {
-      const newQuantity = quantityTotal + 1;
-      setQuantityTotal(newQuantity);
+      // const newQuantity = cartProductQuantity + 1;
+      // setQuantityTotal(newQuantity);
       increaseQuantity();
     }
   };
@@ -99,18 +100,18 @@ const SingleProductPage = () => {
                 </div>
                 
                 <div className={styles.addToCardContainer} >
-                  {quantityTotal == 0 ?
+                  {cartProductQuantity == 0 ?
 
                     <button onClick={(e) => onAddToCart(e)} className={styles.addToCartBtn}>Add to Card</button>
 
                     :
-                    // <QuantitySelector quantityTotal={quantityTotal}/>
+                    // <QuantitySelector cartProductQuantity={cartProductQuantity}/>
                     <div className={styles.quantityControllerContainer}>
                       <div onClick={() => decreaseQuantity()} className="minusBtnContainer">
                         <button className={styles.minusBtn}>-</button>
                       </div>
                       <div className={styles.quantityDisplayAreaContainer}>
-                        <p className={styles.quantityDisplayArea}>{quantityTotal}</p>
+                        <p className={styles.quantityDisplayArea}>{cartProductQuantity}</p>
                       </div>
                       <div onClick={() => onAddToCart()} className="plusBtnCotaier">
                         <button className={styles.plusBtn}>+</button>
