@@ -35,4 +35,4 @@ export const updateQuantity = (productsData, product, action) => {
     }
     return cartProduct;
   });
-};
+}; 

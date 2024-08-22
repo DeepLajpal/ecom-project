@@ -5,6 +5,7 @@ import styles from '../styles/SingleProductPage.module.scss';
 import { addItem, removeItem } from "../features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../features/cart/cartSelector";
+// import QuantitySelector from "../components/QuantitySelector.jsx"
 
 const SingleProductPage = () => {
   let { productId } = useParams();
@@ -12,18 +13,19 @@ const SingleProductPage = () => {
   const [selectedImg, setSelectedImg] = useState(product.images);
   const [quantityTotal, setQuantityTotal] = useState(0);
   const cartProducts = useSelector(selectCartItems)
-  console.log("cartProducts", cartProducts)
+  const cartProduct = cartProducts.find((product) => product.id === productId)
+  console.log("cartProducts", cartProduct)
   const dispatch = useDispatch();
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
 
   const increaseQuantity = () => {
-    const cartItem = { productId, increaseBy: 1 };
+    const cartItem = { product, increaseBy: 1 };
     dispatch(addItem(cartItem));
   }
   const decreaseQuantity = () => {
-    const cartItem = { productId, decreaseBy: 1 };
+    const cartItem = { product, decreaseBy: 1 };
     const newQuantity = quantityTotal - 1;
     setQuantityTotal(newQuantity);
     dispatch(removeItem(cartItem));
@@ -95,10 +97,14 @@ const SingleProductPage = () => {
                 <div className={styles.productPriceYouSaveContainer}>
                   <p className={styles.productPriceYouSave}>You Save: <span className={styles.productPriceYouSaveSpan}>₹{(product.price * (product.discountPercentage / 100)).toFixed(0)} OFF</span></p>
                 </div>
+                
                 <div className={styles.addToCardContainer} >
                   {quantityTotal == 0 ?
+
                     <button onClick={(e) => onAddToCart(e)} className={styles.addToCartBtn}>Add to Card</button>
+
                     :
+                    // <QuantitySelector quantityTotal={quantityTotal}/>
                     <div className={styles.quantityControllerContainer}>
                       <div onClick={() => decreaseQuantity()} className="minusBtnContainer">
                         <button className={styles.minusBtn}>-</button>
@@ -109,8 +115,11 @@ const SingleProductPage = () => {
                       <div onClick={() => onAddToCart()} className="plusBtnCotaier">
                         <button className={styles.plusBtn}>+</button>
                       </div>
-                    </div>}
+                    </div>
+                    }
+
                 </div>
+
               </div>
             </div>
           </div>
