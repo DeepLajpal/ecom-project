@@ -1,47 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: [], // item internal representation --> {productId, productTotalQuantity, productTotalSaving, productSubtotal}
+  items: [], // item internal representation --> {productId, productQuantity, productSaving, productSubtotal}
   cartSubtotal: 0,
   cartTotalSaving: 0,
   cartTotalItems: 0,
 };
-
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const { productId, increaseBy, stock } = action.payload;
+      const { product, increaseBy, stock } = action.payload;
       const existingItem = state.items.find(
-        (item) => item.productId === productId
+        (item) => item.productId === product.productId
       );
 
       if (existingItem) {
         if (stock === 0) return alert("Out Of Stock");
-        else if (existingItem.quantityTotal === stock)
-          alert(
-            `You cannot add more than ${stock} quantities of this product`
-          );
-        else (existingItem.quantityTotal += increaseBy);
+        else if (existingItem.productQuantity === stock)
+          alert(`You cannot add more than ${stock} quantities of this product`);
+        else {
+          existingItem.productQuantity += increaseBy;
+          existingItem.productSaving = ((product.price - (product.price - (product.price * product.discountPercentage) / 100)) * existingItem.productQuantity).toFixed(2);
+          existingItem.productSubtotal = (product.price * existingItem.productQuantity).toFixed(2);
+          return
+        }
       } else {
         state.items.push({
-          productId,
-          quantityTotal: increaseBy,
+          productId: product?.productId,
+          productQuantity: increaseBy,
+          productSaving: (product.price - (product.price - (product.price * product.discountPercentage) / 100)).toFixed(2),
+          productSubtotal: product.price.toFixed(2),
         });
       }
     },
     removeItem: (state, action) => {
-      const { productId, decreaseBy } = action.payload;
+      const { product, decreaseBy } = action.payload;
       const existingItem = state.items.find(
-        (item) => item.productId === productId
+        (item) => item.productId === product.productId
       );
 
       if (existingItem) {
         console.log("existingItem", existingItem);
 
-        existingItem.quantityTotal -= decreaseBy;
+        existingItem.productQuantity -= decreaseBy;
       }
     },
   },

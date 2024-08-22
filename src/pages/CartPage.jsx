@@ -17,16 +17,23 @@ const CartPage = () => {
 
   console.log("cartProducts", cartProducts)
 
-  const onDecrease = (product) => {
-    const updatedProducts = updateQuantity(cartProductsData, product, 'decrease');
-    setCartProductsData(updatedProducts);
-    updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
-  };
+  // const onDecrease = (product) => {
+  //   const updatedProducts = updateQuantity(cartProductsData, product, 'decrease');
+  //   setCartProductsData(updatedProducts);
+  //   updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
+  // };
 
-  const onIncrease = (product) => {
-    const updatedProducts = updateQuantity(cartProductsData, product, 'increase');
-    setCartProductsData(updatedProducts);
-    updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
+  const onDecrease = () => {
+    
+  }
+
+  // const onIncrease = (product) => {
+  //   const updatedProducts = updateQuantity(cartProductsData, product, 'increase');
+  //   setCartProductsData(updatedProducts);
+  //   updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
+  // };
+  const onIncrease = () => {
+   
   };
 
   const getProducts = async () => {
