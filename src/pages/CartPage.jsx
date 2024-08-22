@@ -8,12 +8,15 @@ import CartProductList from '../components/cart/CartProductList';
 import { updateCartTotal, updateQuantity } from '../utils/cartUtils';
 
 const CartPage = () => {
+  
   const [cartSubtotal, setCartSubtotal] = useState(0);
   const [cartTotalSaving, setCartTotalSaving] = useState(0);
   const [cartTotalItems, setCartTotalItems] = useState(0);
   const [cartProductsData, setCartProductsData] = useState([]);
   const cartProducts = useSelector(selectCartItems);
-console.log("cartProducts", cartProducts)
+
+  console.log("cartProducts", cartProducts)
+
   const onDecrease = (product) => {
     const updatedProducts = updateQuantity(cartProductsData, product, 'decrease');
     setCartProductsData(updatedProducts);
