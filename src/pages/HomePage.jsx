@@ -1,7 +1,7 @@
-import useLoadLatestProducts from '../Custom_Hooks/useLoadLatestProducts.js'
+import useFetchAllProducts from '../Custom_Hooks/useFetchAllProducts.js'
 import MultiProductPage from './MultiProductPage'
 const HomePage = () => {
-    useLoadLatestProducts()
+    useFetchAllProducts()
     return (
         <div>
             <MultiProductPage/>

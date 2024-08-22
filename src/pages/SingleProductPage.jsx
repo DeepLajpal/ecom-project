@@ -111,7 +111,7 @@ const SingleProductPage = () => {
                         <button className={styles.plusBtn}>+</button>
                       </div>
                     </div>}
-                </div>
+                </div>``
               </div>
             </div>
           </div>

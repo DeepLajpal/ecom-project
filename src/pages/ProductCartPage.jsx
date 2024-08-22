@@ -3,6 +3,7 @@ import styles from '../styles/ProductCart.module.scss'
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../features/cart/cartSelector';
+import QuantitySelector from '../components/QuantitySelector.jsx';
 
 
 const ProductCartPage = () => {
@@ -11,7 +12,6 @@ const ProductCartPage = () => {
   const [cartTotalItems, setCartTotalItems] = useState(0);
   // const [products, setProducts] = useState([]);
   const [cartProductsData, setCartProductsData] = useState([]);
-  const [productsId, setProductsId] = useState([1, 2, 3, 4, 5, 6]);
   const cartProducts = useSelector(selectCartItems)
   console.log("cartProducts",cartProducts)
   const updateCartTotal = (productsData) => {
@@ -161,31 +161,8 @@ const ProductCartPage = () => {
 
                       </div>
                     </div>
-
-                    <div className={styles.middleContainer}>
-                      <div className={styles.middleContent}>
-
-                        <div className={styles.quantityControllerContainer}>
-                          <div onClick={() => onDecrease(product)} className={styles.minusBtnContainer} >
-                            <span className={styles.minusBtn}>-</span>
-                          </div>
-                          <div className={styles.quantityDisplayAreaContainer}>
-                            <p className={styles.quantityDisplayArea}>{product.productTotalQuantity}</p>
-                          </div>
-                          <div onClick={() => onIncrease(product)}
-                            className={styles.plusBtnContainer}>
-                            <span className={styles.plusBtn}>+</span>
-                          </div>
-                        </div>
-
-                        <div className={styles.btnContainers}>
-                          <span className={styles.deleteBtn}>Delete</span>
-                          <span className={styles.separatorBtn}>|</span>
-                          <span className={styles.saveForLaterBtn}>Save for later</span>
-                        </div>
-
-                      </div>
-                    </div>
+                    
+                    <QuantitySelector onDecrease={onDecrease} onIncrease={onIncrease} product={product}/>
 
                     <div className={styles.rightSideContainer}>
                       <div className={styles.productPriceContainer}>
