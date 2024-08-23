@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from '../styles/SingleProductPage.module.scss';
-import { addItem, removeItem } from "../features/cart/cartSlice";
+import { addItem, decreaseItem, removeItem } from "../features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../features/cart/cartSelector";
 import useFetchSingleProduct from "../hooks/useFetchSingleProduct";
@@ -9,30 +9,45 @@ import QuantitySelector from "../components/QuantitySelector";
 import Loader from "../components/Loader";
 
 const SingleProductPage = () => {
-  let { productId } = useParams();
-  const cartProducts = useSelector(selectCartItems)
   const dispatch = useDispatch();
+  let { productId } = useParams(); //useParams values are string by default
+  productId = Number(productId) // string to number
+
   const { product, loading, error } = useFetchSingleProduct(productId);
   const [selectedImg, setSelectedImg] = useState(product?.images);
-  const cartProduct = cartProducts.find((product) => product.productId === productId)
-  const cartProductQuantity = cartProduct?.quantityTotal ?? 0;
+  const cartProducts = useSelector(selectCartItems);
+  console.log("cartProducts", cartProducts)
+  const existingProduct = cartProducts?.find((product) => {
+    
+    console.log("product.productid",typeof(product.productId))
+    console.log("productid",typeof(productId))
+    return product.productId === productId
+  })
+  console.log("existingProduct", existingProduct)
+  const existingProductQuantity = existingProduct?.productQuantity ?? 0;
 
-  if (error) {
-    console.log(error)
-  }
+  console.log("existingProductQuantity", existingProductQuantity)
+  console.log(product)
 
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
 
   const increaseQuantity = () => {
-    const cartItem = { productId, increaseBy: 1, stock: product.stock };
-    dispatch(addItem(cartItem));
+    const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
+    dispatch(addItem(cartItemPayload));
+    console.log("increase clicked")
   }
 
   const decreaseQuantity = () => {
-    const cartItem = { productId, decreaseBy: 1 };
-    dispatch(removeItem(cartItem));
+    const cartItemPayload = { product, decreaseBy: 1 };
+    dispatch(decreaseItem(cartItemPayload));
+    console.log("decrease clicked")
+  }
+
+  const deleteItem =()=> {
+    const cartItemPayload = { productId };
+    dispatch(removeItem(cartItemPayload));
   }
 
   return (
@@ -80,13 +95,13 @@ const SingleProductPage = () => {
                     </div>
 
                     <div className={styles.addToCardContainer} >
-                      {cartProductQuantity == 0 ?
+                      {existingProductQuantity == 0 ?
 
                         <button onClick={() => increaseQuantity()} className={styles.addToCartBtn}>Add to Card</button>
 
                         :
 
-                        <QuantitySelector cartProductQuantity={cartProductQuantity} onDecrease={decreaseQuantity} onIncrease={increaseQuantity} />
+                        <QuantitySelector existingProduct={existingProduct} onDecrease={decreaseQuantity} onIncrease={increaseQuantity}/>
                       }
 
                     </div>

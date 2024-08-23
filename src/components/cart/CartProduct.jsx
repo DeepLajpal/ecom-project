@@ -1,7 +1,12 @@
 
 import styles from '../../styles/cart/CartProduct.module.scss'
 import QuantitySelector from '../QuantitySelector';
-const CartProduct = ({ product, onDecrease, onIncrease }) => {
+
+
+const CartProduct = ({ product, onDecrease, onIncrease, existingProduct }) => {
+
+    console.log("existingProduct in CartProduct:", existingProduct);
+
     return (<div className={styles.cartProductsTableDataContainer}>
 
         <div className={styles.cartProductsTableDataContent}>
@@ -24,12 +29,12 @@ const CartProduct = ({ product, onDecrease, onIncrease }) => {
                 </div>
             </div>
 
-            <QuantitySelector onDecrease={onDecrease} onIncrease={onIncrease} product={product} />
+            <QuantitySelector onDecrease={onDecrease} onIncrease={onIncrease} product={product} existingProduct={existingProduct}/>
 
             <div className={styles.rightSideContainer}>
                 <div className={styles.productPriceContainer}>
-                    <span className={styles.productActualPrice}> ₹{product.productSubtotal}</span>
-                    <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{product.productTotalSaving}</span></span>
+                    <span className={styles.productActualPrice}> ₹{existingProduct.productSubtotal}</span>
+                    <span className={styles.productSavingPrice}>Saved: <span className={styles.savingAmt}>₹{existingProduct.productSaving}</span></span>
                 </div>
             </div>
 

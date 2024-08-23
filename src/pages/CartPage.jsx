@@ -1,39 +1,34 @@
 import axios from 'axios';
 import styles from '../styles/cart/CartPage.module.scss';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCartItems } from '../features/cart/cartSelector';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems, selectCartTotalSaving, selectCartSubtotal, selectCartTotalItems} from '../features/cart/cartSelector';
 import CartSummary from '../components/cart/CartSummary';
 import CartProductList from '../components/cart/CartProductList';
-import { updateCartTotal, updateQuantity } from '../utils/cartUtils';
+import { addItem, decreaseItem } from '../features/cart/cartSlice';
 
 const CartPage = () => {
-  
-  const [cartSubtotal, setCartSubtotal] = useState(0);
-  const [cartTotalSaving, setCartTotalSaving] = useState(0);
-  const [cartTotalItems, setCartTotalItems] = useState(0);
+
   const [cartProductsData, setCartProductsData] = useState([]);
+  
   const cartProducts = useSelector(selectCartItems);
+  const cartTotalItems = useSelector(selectCartTotalItems);
+  const cartSubtotal = useSelector(selectCartSubtotal);
+  const cartTotalSaving = useSelector(selectCartTotalSaving);
+  const dispatch = useDispatch();
 
   console.log("cartProducts", cartProducts)
 
-  // const onDecrease = (product) => {
-  //   const updatedProducts = updateQuantity(cartProductsData, product, 'decrease');
-  //   setCartProductsData(updatedProducts);
-  //   updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
-  // };
-
-  const onDecrease = () => {
-    
+  const onDecrease = (product) => {
+    const cartItemPayload = { product, decreaseBy: 1 };
+    dispatch(decreaseItem(cartItemPayload));
+    console.log("decrease clicked")
   }
 
-  // const onIncrease = (product) => {
-  //   const updatedProducts = updateQuantity(cartProductsData, product, 'increase');
-  //   setCartProductsData(updatedProducts);
-  //   updateCartTotal(updatedProducts, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
-  // };
-  const onIncrease = () => {
-   
+  const onIncrease = (product) => {
+   const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
+   dispatch(addItem(cartItemPayload));
+   console.log("increase clicked")
   };
 
   const getProducts = async () => {
@@ -41,15 +36,9 @@ const CartPage = () => {
       const productsData = await Promise.all(cartProducts.map(async (item) => {
         const response = await axios.get(`https://dummyjson.com/products/${item.productId}`);
         const product = response.data;
-        return {
-          ...product,
-          productTotalQuantity: 1,
-          productSubtotal: product.price.toFixed(2),
-          productTotalSaving: (product.price - (product.price - (product.price * product.discountPercentage) / 100)).toFixed(2)
-        };
+        return product
       }));
       setCartProductsData(productsData);
-      updateCartTotal(productsData, setCartSubtotal, setCartTotalSaving, setCartTotalItems);
     } catch (error) {
       console.log("API ERROR: Unable to fetch cartProducts");
     }
@@ -69,7 +58,7 @@ const CartPage = () => {
         <CartSummary cartTotalItems={cartTotalItems} cartTotalSaving={cartTotalSaving} cartSubtotal={cartSubtotal} />
 
         <div className={styles.cartProductsTableContainer}>
-          <CartProductList cartProductsData={cartProductsData} onDecrease={onDecrease} onIncrease={onIncrease} />
+          <CartProductList cartProductsData={cartProductsData} cartProducts={cartProducts} onDecrease={onDecrease} onIncrease={onIncrease} />
         </div>
       </div>
     </div>
