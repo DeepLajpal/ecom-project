@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 
 const QuantitySelector = ({ onDecrease, onIncrease, product, existingProduct }) => {
-    console.log("existingProduct in QuantitySelector:", existingProduct);
     const dispatch = useDispatch();
 
     const deleteItem = () => {
