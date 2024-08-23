@@ -1,0 +1,24 @@
+.cartProductsTableContent {
+    .cartProductsTableHeaderContainer {
+      .cartProductsTableHeaderContent {
+        display: grid;
+        grid-template-columns: 4fr 1fr 1fr;
+        justify-items: center;
+        color: #afafaf;
+        font-weight: 600;
+  
+        .productDetails {
+          place-self: start;
+        }
+  
+        .productQuantity {
+          place-self: center;
+        }
+  
+        .productSubtotal {
+          place-self: center;
+        }
+      }
+    }
+  }
+  

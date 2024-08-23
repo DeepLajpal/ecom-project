@@ -1,0 +1,77 @@
+.cartProductsTableDataContainer {
+    .cartProductsTableDataContent {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr;
+  
+      .leftSideContainer {
+        .leftSideContent {
+          display: grid;
+          grid-auto-flow: column;
+          grid-template-columns: 1fr 3fr;
+          align-items: center;
+  
+          .leftSide {
+            width: 85%;
+            height: 10rem;
+  
+            .productImg {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+  
+          .rightSide {
+            display: grid;
+            gap: 0.3rem;
+  
+            .productPriceContainer {
+              display: grid;
+              grid-auto-flow: column;
+              grid-template-columns: max-content;
+              gap: 0.4rem;
+  
+              .productActualPrice {
+                font-weight: 600;
+                font-size: 0.95rem;
+              }
+  
+              .productSavingPrice {
+                font-size: 0.8rem;
+                text-decoration: line-through;
+                color: #8e8e8e;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+  
+      .rightSideContainer {
+        display: grid;
+        align-content: center;
+        justify-content: center;
+  
+        .productPriceContainer {
+          display: grid;
+          justify-items: end;
+          gap: 0.3rem;
+          font-size: 0.95rem;
+  
+          .productActualPrice {
+            font-weight: 600;
+          }
+  
+          .productSavingPrice {
+            font-size: 0.8rem;
+            color: #638527;
+  
+            .savingAmt {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import ErrorPage from './pages/ErrorPage.jsx';
 import SingleProductPage from './pages/SingleProductPage.jsx';
-import ProductCartPage from './pages/ProductCartPage.jsx';
+import CartPage from './pages/CartPage.jsx';
 import HomePage from './pages/HomePage'
 import store from './app/store';
 import { Provider } from 'react-redux';
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "cart/:cartId",
-        element: <ProductCartPage />,
+        element: <CartPage />,
       }
     ]
   }

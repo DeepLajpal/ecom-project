@@ -1,5 +1,15 @@
+import { removeItem } from '../features/cart/cartSlice';
 import styles from '../styles/QuantitySelector.module.scss';
-const QuantitySelector = ({onDecrease, onIncrease, product}) => {
+import { useDispatch } from 'react-redux';
+
+
+const QuantitySelector = ({ onDecrease, onIncrease, product, existingProduct }) => {
+    const dispatch = useDispatch();
+
+    const deleteItem = () => {
+        const cartItemPayload = { productId: existingProduct.productId} ;
+        dispatch(removeItem(cartItemPayload))
+    }
     return (
         <div className={styles.middleContainer}>
             <div className={styles.middleContent}>
@@ -9,7 +19,7 @@ const QuantitySelector = ({onDecrease, onIncrease, product}) => {
                         <span className={styles.minusBtn}>-</span>
                     </div>
                     <div className={styles.quantityDisplayAreaContainer}>
-                        <p className={styles.quantityDisplayArea}>{product.productTotalQuantity}</p>
+                        <p className={styles.quantityDisplayArea}>{existingProduct.productQuantity}</p>
                     </div>
                     <div onClick={() => onIncrease(product)}
                         className={styles.plusBtnContainer}>
@@ -17,7 +27,7 @@ const QuantitySelector = ({onDecrease, onIncrease, product}) => {
                     </div>
                 </div>
 
-                <div className={styles.btnContainers}>
+                <div className={styles.btnContainers} onClick={deleteItem}>
                     <span className={styles.deleteBtn}>Delete</span>
                 </div>
 
