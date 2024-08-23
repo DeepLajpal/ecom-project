@@ -37,12 +37,16 @@ const productQuantityController = (product, existingItem, quantity, action) => {
   const productSaving = product.price * (product.discountPercentage / 100);
   const productSubtotal = product.price - productSaving;
 
-  action === "decrease"
-    ? existingItem.productQuantity > 1
-      ? (existingItem.productQuantity -= quantity)
-      : existingItem.productQuantity
-    : (existingItem.productQuantity += quantity);
-  existingItem.productSaving = roundToTwoDecimal(
+  if (action === "decrease")
+  {
+    existingItem.productQuantity = Math.max(existingItem.productQuantity -= quantity,1)
+  }
+  else
+  {
+    existingItem.productQuantity += quantity
+  }
+
+    existingItem.productSaving = roundToTwoDecimal(
     productSaving * existingItem.productQuantity
   );
   existingItem.productSubtotal = roundToTwoDecimal(
