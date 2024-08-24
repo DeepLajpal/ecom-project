@@ -1,28 +1,85 @@
-.productContainer{
-  border: 2px solid black;
+.productContainer {
+  border: 1px solid #c0c0c0;
+  border-radius: 0.5rem;
+  width: 15rem;
+  height: 25rem;
+  display: grid;
+  place-items: center;
+  color: black;
+  background: white;
 
   .productContent {
-    
-      .productImgContainer {
-        height: 100px;
-        width: 100px;
-    
-        .productImg {
-          height: 100%;
-          width: 100%;
-        }
+    // border: 2px solid green;
+    width: 90%;
+    height: 95%;
+    display: grid;
+    place-items: center;
+    row-gap: 0.5rem;
+
+    .productImgContainer {
+      height: 13rem;
+      width: 13rem;
+      border: 1px solid #c0c0c0;
+      border-radius: 0.5rem;
+      display: grid;
+      place-items: center;
+
+      .productImg {
+        height: 80%;
+        width: 80%;
+        max-width: 80%;
+        max-height: 80%;
       }
-    
-      .productDetails {
-        .productTitle {
-          /* Styles for the product title */
-        }
-    
-        .productPrice {
-          /* Styles for the product price */
+    }
+
+    .productTextContainer {
+      width: inherit;
+      height: inherit;
+      align-self: start;
+      display: grid;
+      column-gap: 0.5rem;
+
+      .linkWrapper {
+        text-decoration: none;
+      }
+
+      .productBrand {
+        font-size: 0.8rem;
+        color: #8e8e8e;
+      }
+      .productTitle {
+        color: black;
+      }
+    }
+
+    .productPriceContainer {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      grid-auto-flow: column;
+      width: inherit;
+      height: inherit;
+      justify-content: start;
+      align-items: center;
+
+      .productActualPrice {
+        font-size: 1rem;
+        font-weight: 600;
+        color: black;
+      }
+
+      .productSavingPrice {
+        font-size: 0.8rem;
+        text-decoration: line-through;
+        color: #8e8e8e;
+        font-weight: 600;
+
+        .savingAmt {
+          font-weight: bold;
         }
       }
     }
 
+    .buttonContainer{}
+  }
 }
-  

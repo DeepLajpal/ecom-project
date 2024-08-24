@@ -7,18 +7,26 @@ const Product = ({ product }) => {
         <div className={styles.productContainer}>
 
             <div className={styles.productContent}>
-            <Link to={`product/${product.id}`}>
+
                 <div className={styles.productImgContainer}>
                     <img className={styles.productImg} src={product.images[0]} alt={product.title} />
                 </div>
-                <div className={styles.productDetails}>
-                    <p className={styles.productTitle}>{product.title}</p>
-                    <p className={styles.productPrice}>₹{product.price}</p>
+                <div className={styles.productTextContainer}>
+                    <Link className={styles.linkWrapper} to={`product/${product.id}`}>
+                        <p className={styles.productBrand}>{product.brand}</p>
+                    </Link>
+                    <Link className={styles.linkWrapper} to={`product/${product.id}`}>
+                        <p className={styles.productTitle}>{product.title}</p>
+                    </Link>
                 </div>
-            </Link>
+                <div className={styles.productPriceContainer}>
+                            <span className={styles.productActualPrice}>₹ {(product.price - (product.price * product.discountPercentage) / 100).toFixed(2)}</span>
+                            <span className={styles.productSavingPrice}>₹{product.price}</span>
+                </div>
                 <div className={styles.buttonContainer}>
-                    <Button btnTxt="Add to cart"/>
+                    <Button btnTxt="Add to cart" />
                 </div>
+
             </div>
 
         </div>
