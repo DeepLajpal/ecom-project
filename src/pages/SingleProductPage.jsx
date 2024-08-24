@@ -16,18 +16,11 @@ const SingleProductPage = () => {
   const { product, loading, error } = useFetchSingleProduct(productId);
   const [selectedImg, setSelectedImg] = useState(product?.images);
   const cartProducts = useSelector(selectCartItems);
-  console.log("cartProducts", cartProducts)
   const existingProduct = cartProducts?.find((product) => {
-    
-    console.log("product.productid",typeof(product.productId))
-    console.log("productid",typeof(productId))
+
     return product.productId === productId
   })
-  console.log("existingProduct", existingProduct)
   const existingProductQuantity = existingProduct?.productQuantity ?? 0;
-
-  console.log("existingProductQuantity", existingProductQuantity)
-  console.log(product)
 
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
@@ -37,12 +30,6 @@ const SingleProductPage = () => {
     const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
     dispatch(addItem(cartItemPayload));
     console.log("increase clicked")
-  }
-
-  const decreaseQuantity = () => {
-    const cartItemPayload = { product, decreaseBy: 1 };
-    dispatch(decreaseItem(cartItemPayload));
-    console.log("decrease clicked")
   }
 
   return (
@@ -96,7 +83,7 @@ const SingleProductPage = () => {
 
                         :
 
-                        <QuantitySelector existingProduct={existingProduct} onDecrease={decreaseQuantity} onIncrease={increaseQuantity}/>
+                        <QuantitySelector product={product} existingProduct={existingProduct} />
                       }
 
                     </div>

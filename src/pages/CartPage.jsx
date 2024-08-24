@@ -1,11 +1,10 @@
 import axios from 'axios';
 import styles from '../styles/cart/CartPage.module.scss';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartTotalSaving, selectCartSubtotal, selectCartTotalItems} from '../features/cart/cartSelector';
 import CartSummary from '../components/cart/CartSummary';
 import CartProductList from '../components/cart/CartProductList';
-import { addItem, decreaseItem } from '../features/cart/cartSlice';
 import Loader from '../components/Loader';
 const CartPage = () => {
 
@@ -15,21 +14,6 @@ const CartPage = () => {
   const cartTotalItems = useSelector(selectCartTotalItems);
   const cartSubtotal = useSelector(selectCartSubtotal);
   const cartTotalSaving = useSelector(selectCartTotalSaving);
-  const dispatch = useDispatch();
-
-  console.log("cartProducts", cartProducts)
-
-  const onDecrease = (product) => {
-    const cartItemPayload = { product, decreaseBy: 1 };
-    dispatch(decreaseItem(cartItemPayload));
-    console.log("decrease clicked")
-  }
-
-  const onIncrease = (product) => {
-   const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
-   dispatch(addItem(cartItemPayload));
-   console.log("increase clicked")
-  };
 
   const getProducts = async () => {
     try {
@@ -60,7 +44,7 @@ const CartPage = () => {
         <CartSummary cartTotalItems={cartTotalItems} cartTotalSaving={cartTotalSaving} cartSubtotal={cartSubtotal} />
 
         <div className={styles.cartProductsTableContainer}>
-         { loading === true ? <Loader/>:  <CartProductList cartProductsData={cartProductsData} cartProducts={cartProducts} onDecrease={onDecrease} onIncrease={onIncrease} loading={loading} setLoading= {setLoading}/>}
+         { loading === true ? <Loader/>:  <CartProductList cartProductsData={cartProductsData} cartProducts={cartProducts} />}
         </div>
       </div>
     </div>

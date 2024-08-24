@@ -1,15 +1,26 @@
-import { removeItem } from '../features/cart/cartSlice';
+import { addItem, decreaseItem, removeItem } from '../features/cart/cartSlice';
 import styles from '../styles/QuantitySelector.module.scss';
 import { useDispatch } from 'react-redux';
 
 
-const QuantitySelector = ({ onDecrease, onIncrease, product, existingProduct }) => {
+const QuantitySelector = ({ product, existingProduct }) => {
     const dispatch = useDispatch();
 
+    const onIncrease = () => {
+        const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
+        dispatch(addItem(cartItemPayload));
+    }
+
+    const onDecrease = () => {
+        const cartItemPayload = { product, decreaseBy: 1 };
+        dispatch(decreaseItem(cartItemPayload));
+    }
+
     const deleteItem = () => {
-        const cartItemPayload = { productId: existingProduct.productId} ;
+        const cartItemPayload = { productId: existingProduct.productId };
         dispatch(removeItem(cartItemPayload))
     }
+    
     return (
         <div className={styles.middleContainer}>
             <div className={styles.middleContent}>
