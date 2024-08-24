@@ -1,4 +1,4 @@
-import styles from '../styles/ProductFilters.module.scss'
+import styles from '../../styles/multiProduct/ProductFilters.module.scss'
 
 const ProductFilters = () => {
   return (
