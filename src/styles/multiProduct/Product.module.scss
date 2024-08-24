@@ -1,12 +1,17 @@
 .productContainer {
-  border: 1px solid #c0c0c0;
+  // border: 1px solid #c0c0c0;
   border-radius: 0.5rem;
   width: 15rem;
   height: 25rem;
   display: grid;
   place-items: center;
-  color: black;
   background: white;
+  box-shadow: 0 0 5px 1px #d6d6d6;
+  transition: box-shadow 0.2s;
+
+  &:hover{
+    box-shadow: 0 0 10px 2px #d6d6d6;
+  }
 
   .productContent {
     // border: 2px solid green;
