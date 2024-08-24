@@ -1,11 +1,11 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: sans-serif;
 }
 
-.multi-product-card-container {
+.multiProductCardContainer {
   display: grid;
   grid-template-columns: 200px 200px;
   grid-template-rows: 200px 200px;
@@ -13,12 +13,6 @@
   justify-content: center;
 }
 
-.product-img-container {
-  height: 100px;
-  width: 100px;
-}
-
-.product-img {
-  height: 100%;
-  width: 100%;
+.productContainer {
+  /* You can add styles for the product container if needed */
 }
