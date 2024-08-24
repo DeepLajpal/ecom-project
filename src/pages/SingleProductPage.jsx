@@ -45,11 +45,6 @@ const SingleProductPage = () => {
     console.log("decrease clicked")
   }
 
-  const deleteItem =()=> {
-    const cartItemPayload = { productId };
-    dispatch(removeItem(cartItemPayload));
-  }
-
   return (
     <>
       {

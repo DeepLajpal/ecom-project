@@ -2,7 +2,7 @@ import styles from '../../styles/multiProduct/ProductFilters.module.scss'
 
 const ProductFilters = () => {
   return (
-    <div>ProductFilters</div>
+    <div><h1>ProductFilters</h1></div>
   )
 }
 

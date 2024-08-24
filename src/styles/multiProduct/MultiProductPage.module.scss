@@ -5,3 +5,12 @@
   font-family: sans-serif;
 }
 
+.multiProductPageContainer{
+  border: 5px solid orange;
+  .multiProductPageContent{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns:1fr 3fr;
+
+  }
+}

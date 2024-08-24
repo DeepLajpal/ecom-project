@@ -10,9 +10,7 @@ const ProductList = () => {
             {products?.map((product) => {
                 return (
                     <div className={styles.productContainer} key={product.id}>
-                        <Link to={`product/${product.id}`}>
                             <Product product={product} />
-                        </Link>
                     </div>
                 );
             })}
