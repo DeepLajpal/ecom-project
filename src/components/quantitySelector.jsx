@@ -20,17 +20,17 @@ const QuantitySelector = ({ product, existingProduct }) => {
         const cartItemPayload = { productId: existingProduct.productId };
         dispatch(removeItem(cartItemPayload))
     }
-    
+
     return (
-        <div className={styles.middleContainer}>
-            <div className={styles.middleContent}>
+        <div className={styles.quantityContainer}>
+            <div className={styles.quantityContent}>
 
                 <div className={styles.quantityControllerContainer}>
                     <div onClick={() => onDecrease(product)} className={styles.minusBtnContainer} >
                         <span className={styles.minusBtn}>-</span>
                     </div>
                     <div className={styles.quantityDisplayAreaContainer}>
-                        <p className={styles.quantityDisplayArea}>{existingProduct.productQuantity}</p>
+                        <p className={styles.quantityDisplayArea}>{existingProduct?.productQuantity}</p>
                     </div>
                     <div onClick={() => onIncrease(product)}
                         className={styles.plusBtnContainer}>

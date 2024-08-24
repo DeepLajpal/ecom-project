@@ -1,10 +1,11 @@
-.middleContainer {
+.quantityContainer {
     display: grid;
     gap: 0.3rem;
     align-items: center;
+    font-size: 1rem;
   }
   
-  .middleContent {
+  .quantityContent {
     width: -webkit-fill-available;
     height: fit-content;
   }
@@ -12,8 +13,8 @@
   .quantityControllerContainer {
     display: grid;
     grid-auto-flow: column;
-    height: fit-content;
-    place-self: end;
+    // height: fit-content;
+    height: 20%;
     border: 1px solid #a8a8a8;
     border-radius: 0.3rem;
     padding: 0.4rem;
