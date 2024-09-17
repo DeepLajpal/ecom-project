@@ -6,8 +6,12 @@ const MultiProductPage = () => {
   return (
     <div className={styles.multiProductPageContainer}>
         <div className={styles.multiProductPageContent}>
-            <ProductFilters/>
-            <ProductList/>
+            <div className={styles.productFilters}>
+                <ProductFilters/>
+            </div>
+            <div className={styles.productList}>
+                <ProductList/>
+            </div>
         </div>
     </div>
   )

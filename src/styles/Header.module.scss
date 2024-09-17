@@ -12,6 +12,10 @@
   align-items: center;
   background: #d6bbbb;
   box-shadow: 2px 2px 8px 0px #bababa;
+  position: sticky;
+  top: 0%;
+  z-index: 5;
+  
   .headerContent {
     height: 90%;
     width: 90%;

@@ -6,16 +6,19 @@ const ProductList = () => {
     const products = useSelector(selectProductsItems);
 
     return (
-        <div className={styles.multiProductCardContainer}>
-            {products?.map((product) => {
-                return (
-                    <div className={styles.productContainer} key={product.id}>
+        <div className={styles.productListContainer}>
+            <div className={styles.productListContent}>
+                {products?.map((product) => {
+                    return (
+                        <div className={styles.productContainer} key={product.id}>
                             <Product product={product} />
-                    </div>
-                );
-            })}
+                        </div>
+                    );
+                })}
+
+            </div>
         </div>
     );
 }
- 
+
 export default ProductList

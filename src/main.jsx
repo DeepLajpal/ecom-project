@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage'
 import store from './app/store';
 import { Provider } from 'react-redux';
 import App from './App.jsx';
+import styles from './styles/Main.module.scss'
 
 const router = createBrowserRouter([
   {
