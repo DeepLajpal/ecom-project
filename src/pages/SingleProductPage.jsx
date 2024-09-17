@@ -6,7 +6,7 @@ import { selectCartItems } from "../features/cart/cartSelector";
 import useFetchSingleProduct from "../hooks/useFetchSingleProduct";
 import QuantitySelector from "../components/QuantitySelector";
 import Loader from "../components/Loader";
-import Button from "../components/generic/Button";
+import Button from "../components/common/Button";
 import { addItem } from "../features/cart/cartSlice";
 
 const SingleProductPage = () => {

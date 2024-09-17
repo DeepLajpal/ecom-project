@@ -1,4 +1,4 @@
-import styles from '../../styles/generic/Button.module.scss'
+import styles from '../../styles/common/Button.module.scss'
 
 const Button = ({btnTxt="Button", onClick}) => {
   
