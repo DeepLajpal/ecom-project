@@ -2,7 +2,7 @@ import { addItem, decreaseItem, removeItem } from '../features/cart/cartSlice';
 import styles from '../styles/QuantitySelector.module.scss';
 import { useDispatch } from 'react-redux';
 
-
+ 
 const QuantitySelector = ({ product, existingProduct }) => {
     const dispatch = useDispatch();
 
