@@ -21,10 +21,13 @@ const Product = ({ product }) => {
         <div className={styles.productContainer}>
 
             <div className={styles.productContent}>
+                
+                <Link className={styles.linkWrapper} to={`product/${product.id}`}>
+                    <div className={styles.productImgContainer}>
+                        <img className={styles.productImg} src={product.images[0]} alt={product.title} />
+                    </div>
+                </Link>
 
-                <div className={styles.productImgContainer}>
-                    <img className={styles.productImg} src={product.images[0]} alt={product.title} />
-                </div>
                 <div className={styles.productTextContainer}>
                     <Link className={styles.linkWrapper} to={`product/${product.id}`}>
                         <p className={styles.productBrand}>{product.brand}</p>

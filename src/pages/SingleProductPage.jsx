@@ -27,7 +27,7 @@ const SingleProductPage = () => {
   const handleIncrease = () => {
     const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
     dispatch(addItem(cartItemPayload));
-}
+  }
 
   return (
     <>
@@ -73,15 +73,17 @@ const SingleProductPage = () => {
                       <p className={styles.productPriceYouSave}>You Save: <span className={styles.productPriceYouSaveSpan}>₹{(product?.price * (product?.discountPercentage / 100)).toFixed(0)} OFF</span></p>
                     </div>
 
-                    <div className={styles.addToCardContainer} >
-                      {existingProductQuantity == 0 ?
+                    {
+                      existingProductQuantity == 0 ? <div className={styles.addToCardContainer} >
+
 
                         <Button btnTxt="Add to Cart" onClick={handleIncrease} />
-                        :
-                        <QuantitySelector product={product} existingProduct={existingProduct} />
-                      }
 
-                    </div>
+
+
+                      </div>
+                        : <QuantitySelector product={product} existingProduct={existingProduct} />
+                    }
 
                   </div>
                 </div>
