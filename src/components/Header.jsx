@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import styles from '../styles/Header.module.scss'
 import { CgProfile } from "react-icons/cg";
 import { FaCartShopping } from "react-icons/fa6";

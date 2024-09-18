@@ -1,0 +1,102 @@
+/* EmptyCart.module.scss */
+.emptyCart {
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+  
+      @media (min-width: 640px) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+  
+      @media (min-width: 1024px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+  
+    &__content {
+      max-width: 28rem;
+      width: 100%;
+      background-color: #fff;
+      padding: 2.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+  
+      &:hover {
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+  
+    &__header {
+      text-align: center;
+    }
+  
+    &__icon {
+      margin-left: auto;
+      margin-right: auto;
+      height: 4rem;
+      width: 4rem;
+      color: #9ca3af; /* gray-400 */
+    }
+  
+    &__title {
+      margin-top: 1.5rem;
+      font-size: 1.875rem; /* 3xl */
+      font-weight: 800; /* extrabold */
+      color: #111827; /* gray-900 */
+    }
+  
+    &__description {
+      margin-top: 0.5rem;
+      font-size: 0.875rem; /* text-sm */
+      color: #6b7280; /* gray-600 */
+    }
+  
+    &__buttonContainer {
+      margin-top: 2rem;
+    }
+  
+    &__button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #fff;
+      background-color: #4f46e5; /* indigo-600 */
+      transition: background-color 0.3s ease-in-out;
+  
+      &:hover {
+        background-color: #4338ca; /* indigo-700 */
+      }
+  
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+      }
+    }
+  
+    &__buttonIcon {
+      position: absolute;
+      left: 0;
+      inset-y: 0;
+      display: flex;
+      align-items: center;
+      padding-left: 0.75rem;
+      color: #6366f1; /* indigo-500 */
+      transition: color 0.3s ease-in-out;
+  
+      .emptyCart__button:hover & {
+        color: #4f46e5; /* indigo-400 */
+      }
+    }
+  }
+  

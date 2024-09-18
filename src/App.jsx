@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import { Outlet } from "react-router-dom";
+import './styles/tailwind.css' ;
 import styles from "./styles/App.module.scss";
 
 const App = () => {

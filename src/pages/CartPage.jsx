@@ -6,6 +6,7 @@ import { selectCartItems, selectCartTotalSaving, selectCartSubtotal, selectCartT
 import CartSummary from '../components/cart/CartSummary';
 import CartProductList from '../components/cart/CartProductList';
 import Loader from '../components/Loader';
+import EmptyCart from '../components/cart/EmptyCart';
 const CartPage = () => {
 
   const [cartProductsData, setCartProductsData] = useState([]);
@@ -36,7 +37,7 @@ const CartPage = () => {
 
   return (
     <div className={styles.productCartContainer}>
-      <div className={styles.productCartContent}>
+     {cartTotalItems > 0 ? <div className={styles.productCartContent}>
         <div className={styles.cartHeadingContainer}>
           <h1 className={styles.cartHeading}>Your Cart</h1>
         </div>
@@ -46,7 +47,7 @@ const CartPage = () => {
         <div className={styles.cartProductsTableContainer}>
          { loading === true ? <Loader/>:  <CartProductList cartProductsData={cartProductsData} cartProducts={cartProducts} />}
         </div>
-      </div>
+      </div> : <EmptyCart/>}
     </div>
   );
 };
