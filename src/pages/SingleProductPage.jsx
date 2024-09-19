@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from '../styles/SingleProductPage.module.scss';
-import { addItem, decreaseItem, removeItem } from "../features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../features/cart/cartSelector";
 import useFetchSingleProduct from "../hooks/useFetchSingleProduct";
 import QuantitySelector from "../components/QuantitySelector";
 import Loader from "../components/Loader";
+import Button from "../components/common/Button";
+import { addItem } from "../features/cart/cartSlice";
 
 const SingleProductPage = () => {
   const dispatch = useDispatch();
@@ -16,38 +17,16 @@ const SingleProductPage = () => {
   const { product, loading, error } = useFetchSingleProduct(productId);
   const [selectedImg, setSelectedImg] = useState(product?.images);
   const cartProducts = useSelector(selectCartItems);
-  console.log("cartProducts", cartProducts)
-  const existingProduct = cartProducts?.find((product) => {
-    
-    console.log("product.productid",typeof(product.productId))
-    console.log("productid",typeof(productId))
-    return product.productId === productId
-  })
-  console.log("existingProduct", existingProduct)
+  const existingProduct = cartProducts?.find((product) => product.productId === productId)
   const existingProductQuantity = existingProduct?.productQuantity ?? 0;
-
-  console.log("existingProductQuantity", existingProductQuantity)
-  console.log(product)
 
   const onSelect = (imgSrc) => {
     setSelectedImg(imgSrc);
   };
 
-  const increaseQuantity = () => {
+  const handleIncrease = () => {
     const cartItemPayload = { product, increaseBy: 1, stock: product.stock };
     dispatch(addItem(cartItemPayload));
-    console.log("increase clicked")
-  }
-
-  const decreaseQuantity = () => {
-    const cartItemPayload = { product, decreaseBy: 1 };
-    dispatch(decreaseItem(cartItemPayload));
-    console.log("decrease clicked")
-  }
-
-  const deleteItem =()=> {
-    const cartItemPayload = { productId };
-    dispatch(removeItem(cartItemPayload));
   }
 
   return (
@@ -94,17 +73,17 @@ const SingleProductPage = () => {
                       <p className={styles.productPriceYouSave}>You Save: <span className={styles.productPriceYouSaveSpan}>₹{(product?.price * (product?.discountPercentage / 100)).toFixed(0)} OFF</span></p>
                     </div>
 
-                    <div className={styles.addToCardContainer} >
-                      {existingProductQuantity == 0 ?
+                    {
+                      existingProductQuantity == 0 ? <div className={styles.addToCardContainer} >
 
-                        <button onClick={() => increaseQuantity()} className={styles.addToCartBtn}>Add to Card</button>
 
-                        :
+                        <Button btnTxt="Add to Cart" onClick={handleIncrease} />
 
-                        <QuantitySelector existingProduct={existingProduct} onDecrease={decreaseQuantity} onIncrease={increaseQuantity}/>
-                      }
 
-                    </div>
+
+                      </div>
+                        : <QuantitySelector product={product} existingProduct={existingProduct} />
+                    }
 
                   </div>
                 </div>

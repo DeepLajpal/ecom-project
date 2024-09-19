@@ -1,7 +1,7 @@
 import CartProduct from './CartProduct';
 import styles from '../../styles/cart/CartProductList.module.scss'
 
-const CartProductList = ({ cartProductsData, onDecrease, onIncrease, cartProducts,loading, setLoading }) => {
+const CartProductList = ({ cartProductsData, onDecrease, onIncrease, cartProducts}) => {
   return (
     <div className={styles.cartProductsTableContent}>
       <div className={styles.cartProductsTableHeaderContainer}>

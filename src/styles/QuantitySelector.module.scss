@@ -1,23 +1,28 @@
-.middleContainer {
+.quantityContainer {
     display: grid;
     gap: 0.3rem;
     align-items: center;
+    font-size: 1rem;
+    width: fit-content;
   }
   
-  .middleContent {
-    width: -webkit-fill-available;
+  .quantityContent {
+    width: 100%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .quantityControllerContainer {
     display: grid;
     grid-auto-flow: column;
-    height: fit-content;
-    place-self: end;
+    height: 20%;
     border: 1px solid #a8a8a8;
     border-radius: 0.3rem;
     padding: 0.4rem;
     color: #8e8e8e;
+    width: 10rem;
   
     &:hover {
       color: #8e8e8e;

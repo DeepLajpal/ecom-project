@@ -1,0 +1,97 @@
+.productContainer {
+  // border: 1px solid #c0c0c0;
+  border-radius: 0.5rem;
+  width: 15rem;
+  height: 25rem;
+  display: grid;
+  place-items: center;
+  background: white;
+  box-shadow: 0 0 5px 1px #d6d6d6;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 10px 2px #d6d6d6;
+  }
+
+  .productContent {
+    // border: 2px solid green;
+    width: 90%;
+    height: 95%;
+    display: grid;
+    place-items: center;
+    row-gap: 0.5rem;
+
+    .productImgContainer {
+      height: 13rem;
+      width: 13rem;
+      border: 1px solid #c0c0c0;
+      border-radius: 0.5rem;
+      display: grid;
+      place-items: center;
+
+      .productImg {
+        height: 10rem;
+        width: 10rem;
+        max-width: 80%;
+        max-height: 80%;
+      }
+    }
+
+    .productTextContainer {
+      width: inherit;
+      height: inherit;
+      align-self: start;
+      display: grid;
+      column-gap: 0.5rem;
+
+      .linkWrapper {
+        text-decoration: none;
+      }
+
+      .productBrand {
+        font-size: 0.8rem;
+        color: #8e8e8e;
+      }
+      .productTitle {
+        color: black;
+      }
+    }
+
+    .productPriceContainer {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      grid-auto-flow: column;
+      width: inherit;
+      height: inherit;
+      justify-content: start;
+      align-items: center;
+
+      .productActualPrice {
+        font-size: 1rem;
+        font-weight: 600;
+        color: black;
+      }
+
+      .productSavingPrice {
+        font-size: 0.8rem;
+        text-decoration: line-through;
+        color: #8e8e8e;
+        font-weight: 600;
+
+        .savingAmt {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .buttonContainer {
+      height: 80%;
+      width: 80%;
+      text-align: center;
+      font-size: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

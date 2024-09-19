@@ -5,7 +5,7 @@ import QuantitySelector from '../QuantitySelector';
 
 const CartProduct = ({ product, onDecrease, onIncrease, existingProduct }) => {
     
-    // Early return if existingProduct is undefined
+    // Early return if existingProduct is undefined as it will automatically become undefined when deleting any product from cart
     if (!existingProduct) return null;
 
     return (<div className={styles.cartProductsTableDataContainer}>

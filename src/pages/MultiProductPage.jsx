@@ -1,30 +1,20 @@
-
-import Product from "../components/Product";
-import { Link } from "react-router-dom";
-import styles from '../styles/MultiProductPage.module.css';
-import { selectProductsItems } from '../features/products/productsSelector';
-import { useSelector } from 'react-redux';
+import ProductFilters from '../components/multiProduct/ProductFilters.jsx';
+import ProductList from '../components/multiProduct/ProductList';
+import styles from '../styles/multiProduct/MultiProductPage.module.scss';
 
 const MultiProductPage = () => {
-
-    const products = useSelector(selectProductsItems);
-    return (
-        <>
-            <div className={styles["multi-product-card-container"]}>
-                {products?.map((product) => {
-                    return (
-                        <div className={styles["product-container"]} key={product.id}>
-                            <Link to={`product/${product.id}`}>
-                                <Product title={product.title} price={product.price} images={product.images[0]} styles={styles} />
-                            </Link>
-                        </div>
-                    )
-                }
-                )}
+  return (
+    <div className={styles.multiProductPageContainer}>
+        <div className={styles.multiProductPageContent}>
+            <div className={styles.productFilters}>
+                <ProductFilters/>
             </div>
-
-        </>
-    )
+            <div className={styles.productList}>
+                <ProductList/>
+            </div>
+        </div>
+    </div>
+  )
 }
 
 export default MultiProductPage

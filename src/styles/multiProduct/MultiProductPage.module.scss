@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.multiProductPageContainer{
+  // border: 5px solid orange;
+
+  .multiProductPageContent{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns:2fr 5fr;
+
+  }
+}
