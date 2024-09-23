@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import styles from '../../styles/multiProduct/ProductFilters.module.scss'
 import DropDown from './DropDown';
 import { selectProductsItems } from '../../features/products/productsSelector';
+import ActiveFilters from './ActiveFilters';
 
 const ProductFilters = () => {
   const allProductsData = useSelector(selectProductsItems)
@@ -18,6 +19,7 @@ const ProductFilters = () => {
         </div>
         <div className={styles.filtersContainer}>
           <div className={styles.filtersContent}>
+            {/* <ActiveFilters list={uniqueCategoryList}/> */}
             <DropDown heading="Shop by category" list={uniqueCategoryList} />
             <DropDown heading="Brand" list={uniquebrandsList} />
           </div>

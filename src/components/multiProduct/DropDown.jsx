@@ -5,6 +5,13 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const DropDown = ({ heading, list }) => {
     const [filterOpen, setFilterOpen] = useState(true);
+    const handleCheckBox = (e)=>{
+        // if (e.nativeEvent.target.checked) {
+            
+        // }
+        // console.log(e.nativeEvent.target.checked);
+        // console.dir(e.nativeEvent.target.attributes.id.textContent); 
+    }
     return (
         <div className={styles.dropDownContainer}>
             <div className={styles.dropDownContent}>
@@ -18,10 +25,10 @@ const DropDown = ({ heading, list }) => {
                 <div className={filterOpen ? styles.dropDownListContainer : styles.hidden}>
                     <div className={styles.dropDownListContent}>
 
-                        {list?.map((list) => {
-                            return (<div key={list} className={styles.dropDownItemContainer}>
-                                <input className={styles.dropDownItemInput} type="checkbox" id={"dropDownItemInput" + list}/>
-                                <label className={styles.dropDownItemLabel} htmlFor={"dropDownItemInput" + list}>{list}</label>
+                        {list?.map((listItem) => {
+                            return (<div key={listItem} className={styles.dropDownItemContainer}>
+                                <input className={styles.dropDownItemInput} onClick={(e)=> handleCheckBox(e)} type="checkbox" id={"dropDownItemInput" + listItem}/>
+                                <label className={styles.dropDownItemLabel} htmlFor={"dropDownItemInput" + listItem}>{listItem}</label>
                             </div>
                             )
                         })}
